@@ -1,0 +1,132 @@
+
+body {
+  width: 100%;
+  height: auto;
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #2c3e50;
+}
+
+.container{
+  background: white;
+  padding:50px;
+}
+.log{
+  padding: 3% 5%;
+  border: 1px black;
+  font-size: 12px;
+  font-family: 'Lobster', cursive;;
+  background-color: greenyellow;
+  margin-top: 15%;
+  margin-bottom: 15%;
+  margin-left: 35%;
+}
+.log1{
+  padding: 3% 5%;
+  border: 1px greenyellow;
+  font-size: 12px;
+  font-family: 'Lobster', cursive;;
+  background-color: greenyellow;
+  margin-top: 15%;
+  margin-bottom: 15%;
+  margin-left: 5%;
+}
+
+.signin h1{
+  font-family: 'Lobster', cursive;
+  text-align: center;
+}
+.login h1{
+  font-family: 'Lobster', cursive;
+  text-align: center;
+}
+
+#title{
+  font-family: 'Lobster', cursive;
+font-size: 30px;
+ color: #32465a}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+
+#img-upload{
+  width: 100%;
+}
+
+.image-preview-input input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+  margin-left:2px;
+}
+img-cropper span input{
+  margin-left: 10px;
+}
+
+
+.upload{
+  margin-top: 20px;
+}
+.radio-class {
+  width: 100%;
+  float: left;
+
+}
+
+.radio-class label {
+  float: left;
+  display: block;
+  padding: 2px 1em 0 0;
+}
+
+.radio-btns p{
+  margin-left: 20px;
+  font-family: 'Lobster', cursive;
+}
+input[type=radio] {
+  float: left;
+  clear: none;
+  margin: 2px 0 0 2px;
+}
+.group:before,
+.group:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+
+.group:after {
+  clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.group {
+  zoom: 1;
+}

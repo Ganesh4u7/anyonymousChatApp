@@ -1,0 +1,101 @@
+<div class="container1">
+<div class="navigationBar">
+  <div class="site-nav">
+    <button class="btn btn-success back-button" (click)="back()">Back to Chat Window</button>
+    <ul class="group">
+      <li><a  (click)="userSettings()"> User Settings</a></li>
+      <li><a  (click)="matchSettings()"> Match Settings</a></li>
+    </ul>
+  </div>
+
+</div>
+<div class="matchSettings" id="matchSettings">
+
+  <div class="heading">
+     <h2>Chat Settings</h2>
+  </div>
+    <form  [formGroup]="settingsForm" (ngSubmit)="onSettings()" >
+  <div class="inputs">
+    <div class="gender ">
+      <p>Please select your gender:</p>
+      <input type="radio" name="gender" value="male" formControlName="gender"> <label>Male</label><br>
+      <input type="radio" name="gender" value="female" formControlName="gender"> <label>Female</label><br>
+      <input type="radio" name="gender" value="other" formControlName="gender"> <label>Other</label><br>
+    </div>
+    <div class="age">
+      <P>Select age:</P>
+      <select name="age" formControlName="age">
+        <option [ngValue]="1" >Below 20</option>
+        <option [ngValue]="2">20-30</option>
+        <option [ngValue]="3">30-40</option>
+        <option [ngValue]="4">40+</option>
+        <option [ngValue]="5">Any</option>
+      </select>
+    </div>
+    <div class="language">
+      <p>Select Language:</p>
+      <select name="language" formControlName="language">
+        <option value="english">English</option>
+        <option value="hindi">Hindi</option>
+        <option value="telugu">Telugu</option>
+        <option value= "tamil">Tamil</option>
+        <option value="any">Any</option>
+      </select>
+    </div>
+
+    <div class="saveButton">
+      <button type="submit" class="btn btn-primary" [disabled]="!settingsForm.valid" value="Sign up">Save Settings</button>
+    </div>
+  </div>
+      <div class="caution">
+        <p> Please note that if the above mentioned category person isn't available at the moment , we'll find a person with the closest match.</p>
+      </div>
+    </form>
+
+
+</div>
+<div class="userSettings" id="userSettings">
+  <div class="heading">
+    <h2>Chat Settings</h2>
+  </div>
+  <form  [formGroup]="userSettingsForm" (ngSubmit)="onUserSettings()" >
+
+    <div class="inputs">
+
+      <div class="language">
+        <p>Select Languages:</p>
+        <select name="language" formControlName="language">
+          <option value="english">English</option>
+          <option value="hindi">Hindi</option>
+          <option value="telugu">Telugu</option>
+          <option value="tamil">Tamil</option>
+        </select>
+      </div>
+      <div class="upload"> &nbsp;
+       <p> Upload Image : </p>&nbsp;
+        <div class="form-group">
+
+          <div class="file-upload">
+            <input id="custom-input" type="file" (change)="fileChangeListener($event)">
+          </div>
+          <div class="actualImg">
+            <img-cropper style="width: 200px;height: 200px;" #cropper [image]="data1" [settings]="cropperSettings"></img-cropper>
+          </div>
+          <br>
+          <div class="previewImg"></div>
+          <span class="result rounded" *ngIf="data1.image" >
+            <img [src]="data1.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+          </span>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="saveButton">
+      <button type="submit" class="btn btn-primary" [disabled]="!userSettingsForm.valid" value="Sign up">Save Settings</button>
+    </div>
+
+  </form>
+
+</div>
+</div>
