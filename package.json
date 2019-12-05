@@ -6,10 +6,7 @@
   },
   "private": true,
   "scripts": {
-    "start": "node ./bin/www ./public/js/app/bundle.js  ",
-    "build": "del-cli public/js/app && webpack --config webpack.config.dev.js --progress --profile --watch ",
-    "build:prod": "del-cli public/js/app && ngc -p tsconfig.aot.json && ngc -p tsconfig.aot.json && webpack --config webpack.config.prod.js --progress --profile --bail && del-cli 'assets/app/**/*.js' 'assets/app/**/*.ngsummary.json' 'assets/app/**/*.ngstyle.*'"
-  },
+    "start": "node ./bin/www ./public/js/app/bundle.js del-cli public/js/app && webpack --config webpack.config.dev.js --progress --profile --watch "},
   "dependencies": {
     "@angular/cdk": "github:angular/cdk-builds#89f40f293288fc8e568cc01c7b79d31e25c61de0",
     "@angular/common": "^5.0.0",
