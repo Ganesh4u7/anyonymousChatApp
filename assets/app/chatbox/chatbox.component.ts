@@ -33,6 +33,7 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
   FPurl: string;
   leftMessage1:Array<{user:String,message:String}> = [];
   leftMessage= 'Please Click on Find Person to start chatting';
+  toggle :boolean = true;
 
 
 
@@ -111,6 +112,7 @@ ngOnDestroy(): void{
     const from= this.chatDetails.from.id;
     this.allowFind=false;
 
+
     this._chatService.leaveRoom({user:this.user,chataData:1,to:to,from:from, toName:toName,fromName:fromName, room:this.room});
 
   }
@@ -121,7 +123,30 @@ ngOnDestroy(): void{
 ngAfterViewChecked() {
   this.scrollToBottom();
 }
+toggleSidebar(){
+if(this.toggle == false){
+  this.toggle = true;
+  document.getElementsByClassName('content')[0].style.width = 'calc(100% - 58px)';
+  // document.getElementsByClassName('content')[0].style.position = 'relative';
+  // document.getElementById('sidepanel').style.position = 'absolute';
 
+  document.getElementById('sidepanel').style.width = '10%';
+   document.getElementsByClassName('profileDetails')[0].style.display = 'none';
+
+}
+else if(this.toggle == true){
+  this.toggle = false;
+  document.getElementsByClassName('content')[0].style.width = '50%';
+  document.getElementById('sidepanel').style.width = '50%';
+  // document.getElementById('sidepanel').style.width = '53px';
+    document.getElementsByClassName('profileDetails')[0].style.display = 'block';
+}
+  // document.getElementsByClassName("sidebar")[0].classList.toggle('active');
+  //
+  // document.getElementsByClassName("content")[0].classList.toggle('active');
+
+
+}
 
 scrollToBottom(): void {
   try {

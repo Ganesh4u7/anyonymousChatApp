@@ -1,17 +1,18 @@
 .container1{
 
   width: 95%;
-  height: 95%;
+  height: 97%;
   margin-left: 2.5%;
+  margin-top: 1.5%;
   background-color: white;
-  font-family: 'Lobster', cursive;
+  /*font-family: 'Lobster', cursive;*/
+  font: inherit;
 }
 /* Site Navigation Start*/
 
 
 .site-nav{
   width: 100%;
-  margin-top: 2%;
 }
 
 .site-nav ul{

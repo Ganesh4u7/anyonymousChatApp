@@ -1,101 +1,154 @@
-<div class="container1">
-<div class="navigationBar">
-  <div class="site-nav">
-    <button class="btn btn-success back-button" (click)="back()">Back to Chat Window</button>
-    <ul class="group">
-      <li><a  (click)="userSettings()"> User Settings</a></li>
-      <li><a  (click)="matchSettings()"> Match Settings</a></li>
-    </ul>
-  </div>
+.container1{
 
-</div>
-<div class="matchSettings" id="matchSettings">
-
-  <div class="heading">
-     <h2>Chat Settings</h2>
-  </div>
-    <form  [formGroup]="settingsForm" (ngSubmit)="onSettings()" >
-  <div class="inputs">
-    <div class="gender ">
-      <p>Please select your gender:</p>
-      <input type="radio" name="gender" value="male" formControlName="gender"> <label>Male</label><br>
-      <input type="radio" name="gender" value="female" formControlName="gender"> <label>Female</label><br>
-      <input type="radio" name="gender" value="other" formControlName="gender"> <label>Other</label><br>
-    </div>
-    <div class="age">
-      <P>Select age:</P>
-      <select name="age" formControlName="age">
-        <option [ngValue]="1" >Below 20</option>
-        <option [ngValue]="2">20-30</option>
-        <option [ngValue]="3">30-40</option>
-        <option [ngValue]="4">40+</option>
-        <option [ngValue]="5">Any</option>
-      </select>
-    </div>
-    <div class="language">
-      <p>Select Language:</p>
-      <select name="language" formControlName="language">
-        <option value="english">English</option>
-        <option value="hindi">Hindi</option>
-        <option value="telugu">Telugu</option>
-        <option value= "tamil">Tamil</option>
-        <option value="any">Any</option>
-      </select>
-    </div>
-
-    <div class="saveButton">
-      <button type="submit" class="btn btn-primary" [disabled]="!settingsForm.valid" value="Sign up">Save Settings</button>
-    </div>
-  </div>
-      <div class="caution">
-        <p> Please note that if the above mentioned category person isn't available at the moment , we'll find a person with the closest match.</p>
-      </div>
-    </form>
+width: 95%;
+height: 97%;
+margin-left: 2.5%;
+margin-top: 1.5%;
+background-color: white;
+/*font-family: 'Lobster', cursive;*/
+font: inherit;
+}
+/* Site Navigation Start*/
 
 
-</div>
-<div class="userSettings" id="userSettings">
-  <div class="heading">
-    <h2>Chat Settings</h2>
-  </div>
-  <form  [formGroup]="userSettingsForm" (ngSubmit)="onUserSettings()" >
+.site-nav{
+width: 100%;
+}
 
-    <div class="inputs">
+.site-nav ul{
+margin: 0;
+text-align: center;
+margin-left: 30%;
+padding: 2%;
+box-sizing: border-box;
 
-      <div class="language">
-        <p>Select Languages:</p>
-        <select name="language" formControlName="language">
-          <option value="english">English</option>
-          <option value="hindi">Hindi</option>
-          <option value="telugu">Telugu</option>
-          <option value="tamil">Tamil</option>
-        </select>
-      </div>
-      <div class="upload"> &nbsp;
-       <p> Upload Image : </p>&nbsp;
-        <div class="form-group">
 
-          <div class="file-upload">
-            <input id="custom-input" type="file" (change)="fileChangeListener($event)">
-          </div>
-          <div class="actualImg">
-            <img-cropper style="width: 200px;height: 200px;" #cropper [image]="data1" [settings]="cropperSettings"></img-cropper>
-          </div>
-          <br>
-          <div class="previewImg"></div>
-          <span class="result rounded" *ngIf="data1.image" >
-            <img [src]="data1.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
-          </span>
+}
+.actualImg img-cropper span .ng2-imgcrop{
+width: 200px;
+height: 200px;
+}
+.site-nav li{
+list-style: none;
+float: left;
+margin-left: 3%;
 
-        </div>
-      </div>
+}
 
-    </div>
-    <div class="saveButton">
-      <button type="submit" class="btn btn-primary" [disabled]="!userSettingsForm.valid" value="Sign up">Save Settings</button>
-    </div>
+.site-nav a {
+color: #32465a;
+display: block;
+padding: 10px 20px;
+text-decoration: none;
+border: 3px solid #32465a;
+transition-property: color, background-color;
+transition-duration: 2s;
+}
+.back-button{
+margin-left: 10px;
+margin-top: 10px;
+}
 
-  </form>
+#matchSettings{
+display: block;
+}
+.matchSettings .heading h2{
+font-size: 30px;
+font-weight: bold;
+font-family: 'Lobster', cursive;
+text-align: center;
+margin-top: 3%;
 
-</div>
-</div>
+}
+.inputs .gender p {
+margin-top: 5%;
+font-size: 25px;
+
+text-align: left;
+
+}
+.inputs {
+margin-left: 10%;
+}
+
+.inputs .age p{
+
+margin-top: 3%;
+font-size: 25px;
+text-align: left;
+
+}
+
+.inputs .language p{
+margin-top: 3%;
+font-size: 25px;
+text-align: left;
+
+}
+.saveButton{
+margin-top: 5%;
+margin-left: 10%;
+float: left;
+}
+.matchSettings .caution p{
+margin-left: 10%;
+margin-top: 2.5%;
+width: 60%;
+color: #999999;
+font-size: 12px;
+}
+#userSettings{
+display: none;
+}
+
+/* User Settings */
+div.inputs{
+height: 60%;
+overflow: auto;
+}
+.upload .actualImg{
+width: 50%;
+height: 40%;
+float: left;
+margin-right: 5%;
+}
+.upload .previewImg{
+width: 30%;
+}
+img-cropper{
+width: 200px;
+width: 200px;
+}
+.userSettings .heading h2{
+font-size: 30px;
+font-weight: bold;
+text-align: center;
+margin-top: 3%;
+
+}
+.inputs .upload p {
+margin-top: 1%;
+font-size: 25px;
+text-align: left;
+margin-bottom: 2%;
+
+}
+
+.group:before,
+.group:after {
+content: " "; /* 1 */
+display: table; /* 2 */
+}
+
+.group:after {
+clear: both;
+}
+
+/*
+* For IE 6/7 only
+* Include this rule to trigger hasLayout and contain floats.
+*/
+.group {
+zoom: 1;
+}
+
