@@ -130,7 +130,7 @@ if(this.toggle == false){
   // document.getElementsByClassName('content')[0].style.position = 'relative';
   // document.getElementById('sidepanel').style.position = 'absolute';
 
-  document.getElementById('sidepanel').style.width = '10%';
+  document.getElementById('sidepanel').style.width = '58px';
    document.getElementsByClassName('profileDetails')[0].style.display = 'none';
 
 }
@@ -146,6 +146,23 @@ else if(this.toggle == true){
   // document.getElementsByClassName("content")[0].classList.toggle('active');
 
 
+}
+
+zoomImg(data:number){
+ // console.log('ZOOM IN');
+    document.getElementById('myModal').style.display='block';
+    if(data == 1)
+    {
+      document.getElementById('img01').src = this.imgUrl;
+    }
+    else if(data == 2)
+    {
+      document.getElementById('img01').src = this.FPimgUrl;
+    }
+
+}
+closeImg(){
+  document.getElementById('myModal').style.display='none';
 }
 
 scrollToBottom(): void {
@@ -164,6 +181,12 @@ scrollToBottom(): void {
   }
 
   leave(){
+    if(this.toggle == false){
+      this.toggle = true;
+      document.getElementsByClassName('content')[0].style.width = 'calc(100% - 58px)';
+      document.getElementById('sidepanel').style.width = '58px';
+      document.getElementsByClassName('profileDetails')[0].style.display = 'none';
+    }
     const toName= this.chatDetails.to.name;
     const fromName= this.chatDetails.from.name;
     const to= this.chatDetails.to.id;
@@ -236,6 +259,12 @@ document.getElementsByClassName('modal')[0].style.display="block";
 
 settings(){
     this.chatData = 2;
+  if(this.toggle == false){
+    this.toggle = true;
+    document.getElementsByClassName('content')[0].style.width = 'calc(100% - 58px)';
+    document.getElementById('sidepanel').style.width = '58px';
+    document.getElementsByClassName('profileDetails')[0].style.display = 'none';
+  }
 }
 
 

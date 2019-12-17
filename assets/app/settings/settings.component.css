@@ -36,24 +36,43 @@
 }
 
 .site-nav a {
-  color: #32465a;
   display: block;
-  padding: 10px 20px;
+  /*padding: 10px 20px;*/
   text-decoration: none;
   border: 3px solid #32465a;
   transition-property: color, background-color;
-  transition-duration: 2s;
+  transition-duration: 1s;
+}
+.userC a{
+  padding: 10px 25px;
+  margin-bottom: 5px;
+}
+.matchC a{
+  padding: 10px 20px;
 }
 .back-button{
   margin-left: 10px;
   margin-top: 10px;
 }
 
+.active{
+  background: #32465a;
+  /*color: white;*/
+
+}
+.userC a{
+  color: #32465a;
+}
+.matchC a{
+  color: #ffffff;
+}
+
+
 #matchSettings{
  display: block;
 }
 .matchSettings .heading h2{
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
   font-family: 'Lobster', cursive;
   text-align: center;
@@ -62,7 +81,7 @@
 }
 .inputs .gender p {
   margin-top: 5%;
-  font-size: 25px;
+  font-size: 20px;
 
   text-align: left;
 
@@ -74,25 +93,25 @@
 .inputs .age p{
 
   margin-top: 3%;
-  font-size: 25px;
+  /*font-size: 25px;*/
   text-align: left;
 
 }
 
 .inputs .language p{
   margin-top: 3%;
-  font-size: 25px;
+  /*font-size: 25px;*/
   text-align: left;
 
 }
 .saveButton{
-  margin-top: 5%;
+  margin-top: 2%;
   margin-left: 10%;
   float: left;
 }
 .matchSettings .caution p{
   margin-left: 10%;
-  margin-top: 2.5%;
+  margin-top: 10%;
   width: 60%;
   color: #999999;
   font-size: 12px;
@@ -102,8 +121,12 @@
  }
 
  /* User Settings */
+
+.userSettings{
+  height: 100%;
+}
 div.inputs{
-  height: 60%;
+  height: 40%;
   overflow: auto;
 }
 .upload .actualImg{
@@ -120,7 +143,7 @@ img-cropper{
   width: 200px;
 }
 .userSettings .heading h2{
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
   margin-top: 3%;
@@ -128,7 +151,7 @@ img-cropper{
 }
 .inputs .upload p {
   margin-top: 1%;
-  font-size: 25px;
+  /*font-size: 20px;*/
   text-align: left;
   margin-bottom: 2%;
 
@@ -150,5 +173,23 @@ img-cropper{
  */
 .group {
   zoom: 1;
+}
+
+@media screen and (max-width: 735px) {
+  #matchSettings .inputs {
+    height: 40%;
+  }
+  #matchSettings .caution p{
+    margin-top: 18%;
+    font-size: 10px;
+    width: 80%;
+  }
+
+}
+@media screen and  (max-width:560px){
+#matchSettings .caution p{
+  margin-top: 17%;
+}
+
 }
 

@@ -96,7 +96,7 @@ div.content{
   overflow: scroll;
 }
 .content .leftMessage{
-  margin-top: 30%;
+
 }
 .content .leftMessage p{
 
@@ -106,17 +106,14 @@ div.content{
   text-align: center;
 
 }
-#myImg {
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
 
 #myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 9999; /* Sit on top */
+  z-index: 99999; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
@@ -131,7 +128,8 @@ div.content{
 .modal-content {
   margin: auto;
   display: block;
-  width: 80%;
+  width: auto;
+  height: 80%;
   max-width: 700px;
 }
 
@@ -182,6 +180,13 @@ div.content{
   text-decoration: none;
   cursor: pointer;
 }
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
 .border{
   border-bottom: whitesmoke 4px;
 }
@@ -223,7 +228,7 @@ div.content{
 }
 .details .keys{
   padding-right: 20%;
-  padding-left: 20%;
+  padding-left: 14%;
   float:left;
   width: 60%;
   font-weight: bolder;
@@ -231,6 +236,7 @@ div.content{
 }
 .details .values{
   float: right;
+  padding-left: 10%;
   width: 40%;
   font-family: 'Lobster', cursive;
 }
@@ -272,17 +278,27 @@ div.content{
     /*z-index: 100;*/
   /*}*/
 .details .profileDetails .data{
+
   height: 31%;
   font: status-bar;
   margin-left: 5%;
-
+  margin-top: 0%;
 }
+.details .profileDetails .leftImg img{
+  margin-bottom: 20%;
+}
+
 #bottom-bar #leave img{
   width: 24px;
   height: 18px;
 }
 
 
+}
+@media only screen and (max-width: 500px){
+#sidepanel .profileDetails .data .keys ol{
+ margin-right: 3%;
+}
 }
 
 /* 100% Image Width on Smaller Screens */

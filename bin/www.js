@@ -54,10 +54,6 @@ var FoundPersonID=null;
 io.on('connection',(socket) => {
 
     console.log('new connection made.');
-
-
-
-
     socket.on('enter',function (data) {
 
 
@@ -165,114 +161,113 @@ io.on('connection',(socket) => {
       });
       });
 
-    socket.on('find',function (data) {
-        var username= data.user;
-        var count;
-        var conditions = {
-            username : { $ne : username},
-            activity: true
-        };
-        usersData.find(conditions, function (err, data1) {
-            if (err) {console.error(err);}
-            else if(data1.length == 0){
-                usersData.find({username:username},{_id:0},function (err2,data2) {
-                    if(err2){console.log(err2); }
-                    else {
-                        io.in(data2[0].socketId).emit('left message',{user:username,
-                            message:"Sorry, There aren't any people available for this moment. Please try after few minutes "});
-                    }
-                });
-            }
-
-            else {
-               // console.log(data1);
-                count = data1.length;
-                usersData.find({username:username},{_id:0},function (err2,data2) {
-                    if(err2){console.log(err2); }
-                    else{
-                        var random = Math.floor(Math.random() * count);
-
-                        var FoundName = data1[random].username;
-                        var FSI = data1[random].socketId;
-                        FoundPersonID = FSI;
-                        var FUrl = data1[random].url;
-                       // console.log(FoundName);
-
-                      function calculateAge(birthday) { // birthday is a date
-                        var ageDifMs = Date.now() - birthday.getTime();
-                        var ageDate = new Date(ageDifMs); // miliseconds from epoch
-                        return Math.abs(ageDate.getUTCFullYear() - 1970);
-                      }
-
-                         RPobj={
-
-                            to:{
-                                name:FoundName,
-                                id:FSI,
-                               url:FUrl,
-                              gender:data1[0].gender,
-                              age:calculateAge(data1[0].dob),
-                              language:data1[0].languages
-                            },
-                            from: {
-                                name: data2[0].username,
-                                id: data2[0].socketId,
-                                url:data2[0].url,
-                              gender:data2[0].gender,
-                              age:calculateAge(data2[0].dob),
-                              language:data2[0].languages
-                            }
-                        };
-                         RandomPobj={
-                            to: {
-                                name: data2[0].username,
-                                id: data2[0].socketId,
-                                url:data2[0].url,
-                              gender:data2[0].gender,
-                              age:calculateAge(data2[0].dob),
-                              language:data2[0].languages
-                            },
-                            from:{
-                                name:FoundName,
-                                id:FSI,
-                                url:FUrl,
-                              gender:data1[0].gender,
-                              age:calculateAge(data2[0].dob),
-                              language:data1[0].languages
-                            }
-                        };
-                        var RName= data2[0].username;
-
-                        var conditions = { 'username':{
-                            $in:[
-                        RName, FoundName]}}
-                            , update={activity:false},options={multi: true};
-
-                       usersData.updateMany(conditions,update,options,function (err3,data3) {
-                           if (err3) {
-                               console.error(err);
-                           }
-                           else {
-                               console.log(data3);
-                           }
-
-                       });
-                       console.log(socket.id,FSI);
-
-
-                        io.in(FSI).emit('found person', RandomPobj);
-                        io.in(data2[0].socketId).emit('found person', RPobj);
-                        io.in(FSI).emit('new message',{user: RandomPobj.from.name, message: RandomPobj.to.name+ ' connected'});
-                        io.in(data2[0].socketId).emit('new message',{user:RandomPobj.to.name, message: RPobj.to.name+ ' connected'});
-                        console.log(RPobj.to);
-
-                    }
-                })
-            }
+  socket.on('find',function (data) {
+    var username= data.user;
+    var count;
+    var conditions = {
+      username : { $ne : username},
+      activity: true
+    };
+    usersData.find(conditions, function (err, data1) {
+      if (err) {console.error(err);}
+      else if(data1.length == 0){
+        usersData.find({username:username},{_id:0},function (err2,data2) {
+          if(err2){console.log(err2); }
+          else {
+            io.in(data2[0].socketId).emit('left message',{user:username,
+              message:" Sorry, There aren't any people available for this moment. Please try after few minutes "});
+          }
         });
+      }
 
+      else {
+        // console.log(data1);
+        count = data1.length;
+        usersData.find({username:username},{_id:0},function (err2,data2) {
+          if(err2){console.log(err2); }
+          else{
+            var random = Math.floor(Math.random() * count);
+
+            var FoundName = data1[random].username;
+            var FSI = data1[random].socketId;
+            FoundPersonID = FSI;
+            var FUrl = data1[random].url;
+            // console.log(FoundName);
+
+            function calculateAge(birthday) { // birthday is a date
+              var ageDifMs = Date.now() - birthday.getTime();
+              var ageDate = new Date(ageDifMs); // miliseconds from epoch
+              return Math.abs(ageDate.getUTCFullYear() - 1970);
+            }
+
+            RPobj={
+
+              to:{
+                name:FoundName,
+                id:FSI,
+                url:FUrl,
+                gender:data1[0].gender,
+                age:calculateAge(data1[0].dob),
+                language:data1[0].languages
+              },
+              from: {
+                name: data2[0].username,
+                id: data2[0].socketId,
+                url:data2[0].url,
+                gender:data2[0].gender,
+                age:calculateAge(data2[0].dob),
+                language:data2[0].languages
+              }
+            };
+            RandomPobj={
+              to: {
+                name: data2[0].username,
+                id: data2[0].socketId,
+                url:data2[0].url,
+                gender:data2[0].gender,
+                age:calculateAge(data2[0].dob),
+                language:data2[0].languages
+              },
+              from:{
+                name:FoundName,
+                id:FSI,
+                url:FUrl,
+                gender:data1[0].gender,
+                age:calculateAge(data2[0].dob),
+                language:data1[0].languages
+              }
+            };
+            var RName= data2[0].username;
+
+            var conditions = { 'username':{
+                $in:[
+                  RName, FoundName]}}
+              , update={activity:false},options={multi: true};
+
+            usersData.updateMany(conditions,update,options,function (err3,data3) {
+              if (err3) {
+                console.error(err);
+              }
+              else {
+                console.log(data3);
+              }
+
+            });
+            console.log(socket.id,FSI);
+
+
+            io.in(FSI).emit('found person', RandomPobj);
+            io.in(data2[0].socketId).emit('found person', RPobj);
+            io.in(FSI).emit('new message',{user: RandomPobj.from.name, message: RandomPobj.to.name+ ' connected'});
+            io.in(data2[0].socketId).emit('new message',{user:RandomPobj.to.name, message: RPobj.to.name+ ' connected'});
+            console.log(RPobj.to);
+
+          }
+        })
+      }
     });
 
+  });
 
     socket.on('leave', function(data){
     var RName=data.toName,FoundName=data.fromName;
@@ -293,7 +288,7 @@ io.on('connection',(socket) => {
       });
 
       //socket.broadcast.to(data.room).emit('left room', {user:data.user, message:'has left the chat.',activity:false});
-        io.in(To).emit('left message', {user: data.user, message: 'has left the chat.',activity:false});
+        io.in(To).emit('left message', {user: data.user, message: ' has left the chat.',activity:false});
         io.in(From).emit('left message', {user: data.user, message:' You left the chat.',activity:false});
 
       socket.leave(data.room);
@@ -328,9 +323,11 @@ socket.on('signout', function(data){
 
       if (err1) {
         console.error(err1);
+        socket.emit('settings save info',{message:'Unable to save Settings, please try again .',status:false});
       }
       else {
         console.log(data1);
+        socket.emit('settings save info',{message:'Settings saved',status:true});
       }
     });
 
@@ -343,8 +340,13 @@ socket.on('signout', function(data){
     var username1 = data.username;
     usersData.update({'username':username1},{requiredAge:age,requiredGender:gender,requiredLanguages:language},{multi:true},function (err,data1) {
 
-      if(err){console.log(err )}
-      else{console.log(data1)
+      if (err) {
+        console.error(err);
+        socket.emit('settings save info',{message:'Unable to save Settings, please try again .',status:false});
+      }
+      else {
+        console.log(data1);
+        socket.emit('settings save info',{message:'Settings saved',status:true});
       }
     });
   });

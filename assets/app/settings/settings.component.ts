@@ -27,6 +27,9 @@ export class SettingsComponent  {
 
  settingsForm: FormGroup;
  selectedFile:File;
+ settingsSaveMessage:String;
+ settingsSaveBol:boolean;
+ settingsBol:boolean = false;
 
  file =0;
 
@@ -42,6 +45,14 @@ export class SettingsComponent  {
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.noFileInput = true;
     this.data1 = {};
+
+    this.chatService.settingsSaveInfo()
+      .subscribe(data=>{
+        this.settingsBol = true;
+        this.settingsSaveBol = data.status;
+        this.settingsSaveMessage = data.message;
+      });
+
   }
 imgUrl = this.chatComponent.imgUrl;
   fileChangeListener($event) {
@@ -81,6 +92,7 @@ onSettings(form: FormGroup){
     var age = this.settingsForm.value.age;
     var gender = this.settingsForm.value.gender;
     var language = this.settingsForm.value.language;
+    this.settingsBol = false;
     console.log(this.settingsForm.value);
     this.chatService.matchSettings({username:username,gender:gender,age:age,language:language});
 
@@ -88,7 +100,7 @@ onSettings(form: FormGroup){
 onUserSettings(form: FormGroup){
   var username = this.loginService.getUsername;
   var language = this.userSettingsForm.value.language;
-
+ this.settingsBol = false;
 
 
   if(this.data1 && this.data1.image) {
@@ -122,10 +134,19 @@ else{
 userSettings(){
   document.getElementById('matchSettings').style.display='none';
   document.getElementById('userSettings').style.display='block';
+  document.getElementsByClassName('userS')[0].classList.add( 'active');
+  document.getElementsByClassName('matchS')[0].classList.remove('active');
+  document.getElementsByTagName('a')[0].style.color = '#FFFFFF';
+  document.getElementsByTagName('a')[1].style.color = '#32465a';
+
 }
 matchSettings(){
   document.getElementById('matchSettings').style.display='block';
   document.getElementById('userSettings').style.display='none';
+  document.getElementsByClassName('matchS')[0].classList.add( 'active');
+  document.getElementsByClassName('userS')[0].classList.remove('active');
+  document.getElementsByTagName('a')[0].style.color = '#32465a';
+  document.getElementsByTagName('a')[1].style.color = '#FFFFFF';
 }
 
 back() {

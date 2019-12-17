@@ -74,6 +74,19 @@ export class ChatService{
         return observable;
     }
 
+  settingsSaveInfo()
+  {
+    let observable = new Observable<{message:String,status:boolean}>(observer=>{
+      this.socket.on('settings save info', (data)=>{
+        observer.next(data);
+      });
+      return () => {this.socket.disconnect();}
+    });
+
+    return observable;
+  }
+
+
     leaveRoom(data){
         this.socket.emit('leave',data);
     }
