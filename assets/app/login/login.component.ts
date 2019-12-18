@@ -229,7 +229,7 @@ export class LoginComponent implements OnInit {
       }
       else {
 
-        this.chatService.signup({username: username, email: email, password: pwd, url: this.NoImageUrl});
+        this.chatService.signup({username: username, email: email, password: pwd,gender:gender,dob:dob, url: this.NoImageUrl});
 
       }
 
