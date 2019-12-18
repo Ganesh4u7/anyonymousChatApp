@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   user:firebase.User;
   signupForm: FormGroup;
   loginForm: FormGroup;
-  passCheck : string;
+  passCheck : boolean;
   errMsg: string;
   selectedFile:File;
   imgUrl: string;
@@ -193,7 +193,7 @@ export class LoginComponent implements OnInit {
 
     if(this.signupForm.value.pwd == this.signupForm.value.cpwd){
 
-      this.passCheck = "Matched";
+      this.passCheck = true;
       var data = JSON.stringify(this.signupForm.value);
 
       var username = this.signupForm.value.username;
@@ -228,11 +228,17 @@ export class LoginComponent implements OnInit {
         }
       }
       else {
+
         this.chatService.signup({username: username, email: email, password: pwd, url: this.NoImageUrl});
 
       }
 
     }
+    else{
+      this.passCheck = false;
+    }
   }
+
+
 
 }

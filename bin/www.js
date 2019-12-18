@@ -29,7 +29,7 @@ let gfs;
 // const uri = "mongodb+srv://rf:thebest1@ecom-95a4a.mongodb.net/ecom";
  const uri = "mongodb://roger:thebest1@ds061631.mlab.com:61631/chatapp";
 // const uri = "mongodb+srv://ganeshbilla4u:thebest1@cluster0-hihoh.mongodb.net/test?retryWrites=true&w=majority";
-//  const uri = "mongodb://localhost:27017/chat";
+//   const uri = "mongodb://localhost:27017/chat";
 mongoose.connect(uri,{ useNewUrlParser: true });
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));

@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
   <div class="container" >
     <h2 class="text-center" id="title" >Anonymous ChatApp</h2>
 
@@ -31,7 +30,7 @@
 
               required
               >
-              <span class="text-muted" *ngIf="!signupForm.controls['username'].valid && signupForm.controls['username']?.touched"> Please enter a valid username</span>
+              <span class="text-muted"  style="color: red;" *ngIf="!signupForm.controls['username'].valid && signupForm.controls['username']?.touched"> Please enter a valid username</span>
             </div>
 
             <div class="form-group">
@@ -41,25 +40,29 @@
                      required
                      pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
               >
-              <span class="text-muted" *ngIf="!signupForm.controls['email'].valid && signupForm.controls['email']?.touched"> Please enter a valid email</span>
+              <span class="text-muted" style="color: red;" *ngIf="!signupForm.controls['email'].valid && signupForm.controls['email']?.touched"> Please enter a valid email</span>
 
             </div>
 
             <div class="form-group">
               <input type="password" id="password" class="form-control input-lg" placeholder="Password"
                      formControlName="pwd"
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+
               required
               >
-              <span class="text-muted" style="color:red;" *ngIf="!signupForm.controls['pwd'].valid && signupForm.controls['pwd']?.touched">Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</span>
+              <span class="text-muted" style="color: red;" *ngIf="!signupForm.controls['pwd'].valid && signupForm.controls['pwd']?.touched"> Password Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</span>
 
             </div>
             <div class="form-group">
               <input type="password"  id="password2" class="form-control input-lg" placeholder="Password2"
                      formControlName="cpwd"
+                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+
                      required
               >
-              <span class="text-muted" > {{passCheck}}</span>
+              <span id='message'></span>
+              <span class="text-muted" style="color: red;" > {{passCheck}}</span>
             </div>
             <div class="form-group group radio-btns " style="margin-left: 8px" >
              <label class="radio inline" style="font-family: 'Lobster', cursive;">Gender:</label>
@@ -72,9 +75,14 @@
               <label class="radio-inline">
                 <input type="radio" name="gender" value="other" formControlName="gender"><p>Other</p>
               </label>
+              <span class="text-muted" style="color: red;" *ngIf="!signupForm.controls['gender'].valid && signupForm.controls['gender']?.touched"> Please select Gender.</span>
             </div>
-              <label style="margin-right: 10px; margin-left: 8px;font-family: 'Lobster', cursive;">Date of Birth:</label>
-              <input type="date" name="dob" formControlName="dob" required>
+              <div>
+                <label style="margin-right: 10px; margin-left: 8px;font-family: 'Lobster', cursive;">Date of Birth:</label>
+                <input type="date" name="dob" formControlName="dob" required>
+                <span class="text-muted" style="color: red;" *ngIf="!signupForm.controls['dob'].valid && signupForm.controls['dob']?.touched"> Please select DOB.</span>
+              </div>
+
             </div>
 
 
@@ -101,7 +109,7 @@
               <!--<img [src]="data.image" >-->
               <span class="text-danger" data-toggle="modal" *ngIf="errMsg != ''"></span>
             <div>
-              <button type="submit" class="btn btn-lg btn-primary" [disabled]="!signupForm.valid" value="Sign up">Sign Up</button>
+              <button type="submit" class="btn btn-lg btn-primary" [disabled]="!signupForm.valid"  value="Sign up">Sign Up</button>
             </div>
 
           </fieldset>
@@ -153,4 +161,5 @@
 
 
 </body>
+
 
