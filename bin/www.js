@@ -110,6 +110,7 @@ io.on('connection',(socket) => {
             url:url,
             activity:true
           });
+          console.log(dob);
           rog.save(function (error) {
             if(error){
               console.log(error);
@@ -195,7 +196,8 @@ io.on('connection',(socket) => {
             // console.log(FoundName);
 
             function calculateAge(birthday) { // birthday is a date
-              var ageDifMs = Date.now() - birthday.getTime();
+              const moonLanding = new Date(birthday);
+              var ageDifMs = Date.now() -  moonLanding.getTime();
               var ageDate = new Date(ageDifMs); // miliseconds from epoch
               return Math.abs(ageDate.getUTCFullYear() - 1970);
             }
