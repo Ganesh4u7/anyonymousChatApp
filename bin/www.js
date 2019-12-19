@@ -176,7 +176,7 @@ io.on('connection',(socket) => {
           if(err2){console.log(err2); }
           else {
             io.in(data2[0].socketId).emit('left message',{user:username,
-              message:" Sorry, There aren't any people available for this moment. Please try after few minutes "});
+              message:"- Sorry, There aren't any people available at this moment. Please try again after sometime "});
           }
         });
       }
@@ -290,8 +290,8 @@ io.on('connection',(socket) => {
       });
 
       //socket.broadcast.to(data.room).emit('left room', {user:data.user, message:'has left the chat.',activity:false});
-        io.in(To).emit('left message', {user: data.user, message: ' has left the chat.',activity:false});
-        io.in(From).emit('left message', {user: data.user, message:' You left the chat.',activity:false});
+        io.in(To).emit('left message', {user: data.user, message: '- has left the chat.',activity:false});
+        io.in(From).emit('left message', {user: data.user, message:'- You left the chat.',activity:false});
 
       socket.leave(data.room);
 
