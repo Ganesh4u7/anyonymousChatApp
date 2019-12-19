@@ -962,3 +962,9 @@ div.content{
 #frame .content .message-input .wrap button:focus {
   outline: none;
 }
+@media screen and (max-width: 520px){
+
+  .content .leftMessage p{
+    font-size: 25px;
+  }
+}
