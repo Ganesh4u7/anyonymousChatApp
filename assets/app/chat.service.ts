@@ -183,4 +183,17 @@ export class ChatService{
 
     return observable;
   }
+  profilePicUpdate(data){
+      this.socket.emit('profilePicUpdate',data);
+  }
+  toImageUpdate(){
+    let observable = new Observable<{url:String}>(observer=>{
+      this.socket.on('to image update', (data)=>{
+        observer.next(data);
+      });
+      return () => {this.socket.disconnect();}
+    });
+
+    return observable;
+  }
 }

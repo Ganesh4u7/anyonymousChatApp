@@ -25,7 +25,7 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
   users:Array<{name:String,id:String}> =[];
   messageText:String = '';
   chatDetails:{};
-  FPname:string;FPgender:string;FPage:number;FPlanguage:string;FPimgUrl:string;
+  FPname:string;FPgender:string;FPage:number;FPlanguage:string;FPimgUrl:string;FPid:string;
   chatData= 0;
   chatDataBol= false;
   msgData = 0;
@@ -62,10 +62,12 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
       this.FPname = data.to.name;
       this.FPgender = data.to.gender;
       this.FPage = data.to.age;
+      this.FPid = data.to.id;
       this.FPlanguage = data.to.language;
       this.FPimgUrl = data.to.url;
        this.FPurl = data.to.url;
-       console.log(data.to);}
+      // console.log(data.to);
+      }
 
   );
     this._chatService.foundPersonName()
@@ -82,7 +84,8 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
     this._chatService.newMessageReceived()
       .subscribe(data=>{this.messageArray.push(data);
       this.msgData = 1;
-    console.log(data);});
+   // console.log(data);
+      });
 
     this._chatService.leftMessage()
       .subscribe(data=>{
@@ -106,6 +109,12 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
         ,2000);
       }
       );
+    this._chatService.toImageUpdate()
+      .subscribe(data=>{
+        this.chatDetails.to.url = data.url;
+        this.FPimgUrl = data.url;
+        this.FPurl = data.url;
+      });
 
   }
 

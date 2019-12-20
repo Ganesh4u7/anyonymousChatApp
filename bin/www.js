@@ -442,6 +442,12 @@ socket.on('signout', function(data){
 
 
     });
+    socket.on('profilePicUpdate',function (data) {
+      var to = data.to;
+      var url = data.url;
+      io.in(to).emit('to image update',{url:url});
+      console.log('ProfilePicUpdated');
+    });
 
     socket.on('keyPress',function (data) {
       var to = data.to;

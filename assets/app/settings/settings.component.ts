@@ -43,6 +43,12 @@ export class SettingsComponent  {
               private  chatComponent: ChatboxComponent
   ){
     this.cropperSettings = new CropperSettings();
+    this.cropperSettings.width = 100;
+    this.cropperSettings.height = 100;
+    this.cropperSettings.croppedWidth =300;
+    this.cropperSettings.croppedHeight = 300;
+    this.cropperSettings.canvasWidth = 250;
+    this.cropperSettings.canvasHeight = 200;
     this.cropperSettings.noFileInput = true;
     this.data1 = {};
 
@@ -122,6 +128,12 @@ onUserSettings(form: FormGroup){
         this.chatService.userSettings({username: username, language:language, url: downloadUrl});
         console.log(downloadUrl);
         this.imgUrl = downloadUrl;
+        this.chatComponent.imgUrl = downloadUrl;
+
+        if(this.chatComponent.chatDataBol == true){
+          var to = this.chatComponent.FPid;
+          this.chatService.profilePicUpdate({to:to,url:downloadUrl});
+        }
 
       });
 
