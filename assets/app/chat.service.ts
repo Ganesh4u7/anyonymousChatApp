@@ -163,10 +163,24 @@ export class ChatService{
         return observable;
     }
 
+
   userSettings(data){
     this.socket.emit('userSettings',data);
   }
   matchSettings(data){
     this.socket.emit('matchSettings',data);
+  }
+  keyPressNotification(data){
+      this.socket.emit('keyPress',data);
+  }
+  typingMessage(){
+    let observable = new Observable<{message:String}>(observer=>{
+      this.socket.on('typing message', (data)=>{
+        observer.next(data);
+      });
+      return () => {this.socket.disconnect();}
+    });
+
+    return observable;
   }
 }

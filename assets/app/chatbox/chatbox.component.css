@@ -287,12 +287,6 @@ div.content{
 .details .profileDetails .leftImg img{
   margin-bottom: 20%;
 }
-  @media screen and (max-width: 520px){
-
-  .content .leftMessage p{
-    font-size: 25px;
-  }
-}
 
 #bottom-bar #leave img{
   width: 24px;
@@ -719,7 +713,6 @@ div.content{
     display: none;
   }
 }
-
 #frame #sidepanel #contacts ul li.contact .wrap .meta .name {
   font-weight: 600;
 }
@@ -970,3 +963,13 @@ div.content{
   outline: none;
 }
 
+@media screen and (max-width: 520px){
+
+  .content .leftMessage p{
+    font-size: 25px;
+  }
+}
+
+#typing{
+  display: none;
+}

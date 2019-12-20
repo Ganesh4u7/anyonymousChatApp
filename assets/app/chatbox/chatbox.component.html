@@ -134,6 +134,9 @@
     <div class="contact-profile" >
       <img  src="{{FPurl}}" alt="" />
       <p>{{chatDetails.to.name[0].toUpperCase() + chatDetails.to.name.substr(1).toLowerCase()}}</p>
+      <li id="typing" >
+        <p style="margin-left: 2%">Typing...</p>
+      </li>
 
       <div class="social-media">
         <i class="fa fa-facebook" aria-hidden="true"></i>
@@ -162,7 +165,8 @@
     </div>
     <div class="message-input">
       <div class="wrap">
-        <input type="text" placeholder="Write your message..." #msg [(ngModel)]="messageText" (keyup.enter)="sendMessage()" />
+        <input type="text" placeholder="Write your message..." #msg [(ngModel)]="messageText"
+                 (keyup)="keyPress()" (keyup.enter)="sendMessage()"     />
         <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
         <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true" (click)="sendMessage()"></i></button>
       </div>

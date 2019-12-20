@@ -176,7 +176,7 @@ io.on('connection',(socket) => {
           if(err2){console.log(err2); }
           else {
             io.in(data2[0].socketId).emit('left message',{user:username,
-              message:"- Sorry, There aren't any people available at this moment. Please try again after sometime "});
+              message:"- Sorry, There aren't any people available at this moment. Please try again after sometime. "});
           }
         });
       }
@@ -441,6 +441,12 @@ socket.on('signout', function(data){
               io.in(From).emit('new message', {user: data.user, message: data.message});
 
 
+    });
+
+    socket.on('keyPress',function (data) {
+      var to = data.to;
+
+      io.in(to).emit('typing message',{message:'typing...'});
     });
 
 socket.on('disconnect', function () {

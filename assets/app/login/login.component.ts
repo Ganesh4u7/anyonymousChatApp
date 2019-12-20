@@ -220,6 +220,7 @@ export class LoginComponent implements OnInit {
 
             firebase.database().ref('photos/' + username).set(downloadUrl);
             this.chatService.signup({username: username, email: email, password: pwd,gender:gender,dob:dob, url: downloadUrl});
+
             //console.log(downloadUrl);
             //this.chatService.signup({username: username ,email:email,password :pwd,url:downloadUrl});
 
@@ -228,8 +229,8 @@ export class LoginComponent implements OnInit {
         }
       }
       else {
-
-        this.chatService.signup({username: username, email: email, password: pwd,gender:gender,dob:dob, url: this.NoImageUrl});
+        console.log(dob);
+        this.chatService.signup({username: username, email: email, password: pwd, gender:gender,dob:dob,url: this.NoImageUrl});
 
       }
 

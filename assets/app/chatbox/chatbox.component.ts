@@ -34,6 +34,7 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
   leftMessage1:Array<{user:String,message:String}> = [];
   leftMessage= 'Please Click on Find Person to start chatting';
   toggle :boolean = true;
+  typing:boolean = false;
 
 
 
@@ -92,6 +93,18 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
         this.chatDetails= {};
         this.chatDataBol = false;
         this.chatData=0;}
+      );
+    this._chatService.typingMessage()
+      .subscribe(data=>{
+        this.typing = true;
+          document.getElementById('typing').style.display="block";
+        setTimeout(function () {
+          this.typing =false;
+          // console.log(this.typing);
+            document.getElementById('typing').style.display="none";
+          }
+        ,2000);
+      }
       );
 
   }
@@ -203,13 +216,19 @@ scrollToBottom(): void {
 
   sendMessage()
   {
-    const to= this.chatDetails.to.id;
-    const from= this.chatDetails.from.id;
-    const toName = this.chatDetails.to.name;
+    var to= this.chatDetails.to.id;
+    var from= this.chatDetails.from.id;
+    var toName = this.chatDetails.to.name;
     console.log(toName);
     this._chatService.sendMessage({user:this.user, to:to, from:from, toName: toName,message:this.messageText});
     this.messageText = '';
   }
+  keyPress()
+  {
+    var to = this.chatDetails.to.id;
+    this._chatService.keyPressNotification({to:to})
+
+}
 
   logout(){
     if(this.chatData == 1) {
@@ -266,6 +285,7 @@ settings(){
     document.getElementsByClassName('profileDetails')[0].style.display = 'none';
   }
 }
+
 
 
 
