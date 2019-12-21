@@ -17,13 +17,13 @@
     <form  [formGroup]="settingsForm" (ngSubmit)="onSettings()" >
   <div class="inputs">
     <div class="gender ">
-      <p>Please select your gender:</p>
+      <p>Required gender :</p>
       <input type="radio" name="gender" value="male" formControlName="gender"> <label>Male</label><br>
       <input type="radio" name="gender" value="female" formControlName="gender"> <label>Female</label><br>
       <input type="radio" name="gender" value="other" formControlName="gender"> <label>Other</label><br>
     </div>
     <div class="age">
-      <P>Select age:</P>
+      <P>Select age :</P>
       <select name="age" formControlName="age">
         <option [ngValue]="1" >Below 20</option>
         <option [ngValue]="2">20-30</option>
@@ -33,7 +33,7 @@
       </select>
     </div>
     <div class="language">
-      <p>Select Language:</p>
+      <p>Select Language :</p>
       <select name="language" formControlName="language">
         <option value="english">English</option>
         <option value="hindi">Hindi</option>
@@ -67,7 +67,7 @@
     <div class="inputs">
 
       <div class="language">
-        <p>Select Languages:</p>
+        <p>Select Languages :</p>
         <select name="language" formControlName="language">
           <option value="english">English</option>
           <option value="hindi">Hindi</option>

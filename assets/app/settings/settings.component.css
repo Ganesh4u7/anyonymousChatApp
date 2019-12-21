@@ -74,14 +74,14 @@
 .matchSettings .heading h2{
   font-size: 20px;
   font-weight: bold;
-  font-family: 'Lobster', cursive;
+  /*font-family: 'Lobster', cursive;*/
   text-align: center;
   margin-top: 3%;
 
 }
 .inputs .gender p {
   margin-top: 5%;
-  font-size: 20px;
+  font-size: 18px;
 
   text-align: left;
 
@@ -124,6 +124,10 @@
 
 .userSettings{
   height: 100%;
+}
+
+.userSettings .language{
+  margin-top: 5%;
 }
 div.inputs{
   height: 40%;
