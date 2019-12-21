@@ -47,11 +47,7 @@
 
 
       </div>
-      <div id="myModal" class="modal">
-        <span class="close" (click)="closeImg()">&times;</span>
-        <img class="modal-content" id="img01" >
 
-      </div>
 
     </div>
     <div class="border"></div>
@@ -129,6 +125,11 @@
       <button id="settings" (click)="settings()"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
       <button id="addcontact" (click)="logout()"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> <span>SignOut</span></button>
     </div>
+  </div>
+  <div id="myModal" class="modal">
+    <span class="close" (click)="closeImg()">&times;</span>
+    <img class="modal-content" id="img01" >
+
   </div>
   <div class="content contentActive" *ngIf="chatData == 1">
     <div class="contact-profile" >
