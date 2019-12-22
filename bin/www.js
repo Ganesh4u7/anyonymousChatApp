@@ -455,6 +455,9 @@ socket.on('signout', function(data){
       io.in(to).emit('typing message',{message:'typing...'});
     });
 
+
+
+
 socket.on('disconnect', function () {
     var id = socket.id;
 

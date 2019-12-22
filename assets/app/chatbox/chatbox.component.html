@@ -79,20 +79,20 @@
       <div class="img-fpp">
         <img src="{{FPimgUrl}}" alt=" " (click)="zoomImg(2)" >
       </div>
-      <div class="keys">
-        <ol>
-        <li >Name:</li>
-        <li >Gender:</li>
-        <li >Age:</li>
-        <li >Language:</li>
-        </ol>
-      </div>
+      <!--<div class="keys">-->
+        <!--<ol>-->
+        <!--<li >Name:</li>-->
+        <!--<li >Gender:</li>-->
+        <!--<li >Age:</li>-->
+        <!--<li >Language:</li>-->
+        <!--</ol>-->
+      <!--</div>-->
       <div class="values">
         <ol>
-          <li>{{FPname[0].toUpperCase() + FPname.substr(1).toLowerCase()}}</li>
-          <li>{{FPgender}}</li>
-          <li>{{FPage}}</li>
-          <li>{{FPlanguage}}</li>
+          <li>Name:{{FPname[0].toUpperCase() + FPname.substr(1).toLowerCase()}}</li>
+          <li>{{FPage}},{{FPgender}}</li>
+          <!--<li>{{FPage}}</li>-->
+          <li>Language:{{FPlanguage}}</li>
         </ol>
       </div>
       </div>

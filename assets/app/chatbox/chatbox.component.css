@@ -226,19 +226,20 @@ div.content{
   width: 100%;
 
 }
-.details .keys{
-  padding-right: 20%;
-  padding-left: 14%;
-  float:left;
-  width: 60%;
-  font-weight: bolder;
-  box-sizing: border-box;
-}
+/*.details .keys{*/
+  /*padding-right: 20%;*/
+  /*padding-left: 14%;*/
+  /*float:left;*/
+  /*width: 60%;*/
+  /*font-weight: bolder;*/
+  /*box-sizing: border-box;*/
+/*}*/
 .details .values{
-  float: right;
-  padding-left: 10%;
-  width: 40%;
+  text-align: center;
+  padding: 10%;
+  width: 100%;
   font-family: 'Lobster', cursive;
+  box-sizing: border-box;
 }
 
  .details .leftImg img{

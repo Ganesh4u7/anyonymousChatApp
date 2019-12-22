@@ -11,7 +11,9 @@ import {Observable} from 'rxjs/Observable';
 export class ChatService{
     username:string;
     allowFind: boolean;
-    private socket = io();
+    private socket = io().connect({reconnection:true,reconnectionAttempts:Infinity});
+
+
 
 
     enterName(data){
