@@ -8,7 +8,7 @@ import {FormControl, FormGroup, NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {AngularFireDatabase} from "@angular/fire/database";
 
-import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
+import {ImageCropperComponent, CropperSettings,Bounds} from 'ng2-img-cropper';
 
 import io from 'socket.io-client';
 
@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
 
   data1: any;
   cropperSettings: CropperSettings;
+  croppedWidth:number;
+  croppedHeight:number;
 
   FeaturedPhotoStream:FirebaseObjectObservable<FeaturedPhotoUrls>;
 
@@ -45,7 +47,8 @@ export class LoginComponent implements OnInit {
   imgUrl: string;
   file =0;
   url;
-  width,height =0;
+  width=0;
+  height =0;
   NoImageUrl ="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
   loginStatus = true;
   data2 = false;
@@ -70,15 +73,20 @@ export class LoginComponent implements OnInit {
     this.cropperSettings.canvasWidth = 250;
     this.cropperSettings.canvasHeight = 200;
     this.cropperSettings.noFileInput = true;
+    this.cropperSettings.rounded = false;
+    this.cropperSettings.keepAspect = false;
+
+    this.cropperSettings.cropperDrawSettings.strokeColor = 'rgba(255,255,255,1)';
+    this.cropperSettings.cropperDrawSettings.strokeWidth = 2;
+
     this.data1 = {};
 
-
-    this.FeaturedPhotoStream = this.db.object('/photos')
+    this.FeaturedPhotoStream = this.db.object('/photos');
 
     this.chatService.signupStatus().subscribe(data=>{
 
 
-      console.log(data)
+      // console.log(data);
       if(data.success == true){
 
         this.router.navigate(['/chat']);
@@ -94,6 +102,7 @@ export class LoginComponent implements OnInit {
 
     this.chatService.loginStatus().subscribe(data=> {
       // console.log(data.success)
+      var data = data;
       if (data.success == true) {
         this.router.navigate(['/chat']);
         this.service.setLoggedin(true);
@@ -113,6 +122,10 @@ export class LoginComponent implements OnInit {
 
     });
 
+  }
+  cropped(bounds:Bounds) {
+    this.croppedHeight =bounds.bottom-bounds.top;
+    this.croppedWidth = bounds.right-bounds.left;
   }
   fileChangeListener($event) {
     this.data2= true;
@@ -142,7 +155,7 @@ export class LoginComponent implements OnInit {
       pwd:new FormControl(null),
       cpwd: new FormControl(null),
       email: new FormControl(null),
-      gender: new FormControl(null)
+      gender: new FormControl(null),
     dob:new FormControl(null)});
 
 
@@ -226,7 +239,7 @@ export class LoginComponent implements OnInit {
 
           });
 
-        }
+        })
       }
       else {
         console.log(dob);

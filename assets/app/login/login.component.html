@@ -92,10 +92,10 @@
               <div class="form-group">
 
           <div class="file-upload">
-                 <input id="custom-input" type="file"  style="margin-bottom: 10px;margin-left: 8px;margin-top: 5px;" (change)="fileChangeListener($event)">
+                 <input id="custom-input" type="file" accept="image/*" style="margin-bottom: 10px;margin-left: 8px;margin-top: 5px;" (change)="fileChangeListener($event)">
           </div>
                 <div  *ngIf="this.data2">
-                  <img-cropper #cropper [image]="data1"  [settings]="cropperSettings"></img-cropper>
+                  <img-cropper #cropper [image]="data1"  [settings]="cropperSettings" (onCrop)="cropped($event)"></img-cropper>
                 </div>
           <br>
           <span class="result rounded" *ngIf="data1.image" style="width: 100px;height: 100px;" >

@@ -137,7 +137,7 @@ onUserSettings(form: FormGroup){
 
       });
 
-    }
+    })
   }
 else{
     this.chatService.userSettings({username:username,language:language,url: this.imgUrl})

@@ -41,7 +41,7 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
   messageArray:Array<{user:String,message:String}> = [];
   constructor(private _chatService:ChatService,
               private router:Router,
-              private  loginService:LoginService
+              private  loginService:LoginService,
               private db:AngularFireDatabase
   ){
 
@@ -52,8 +52,7 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
       .subscribe(data=> this.messageArray.push(data));
 
     this._chatService.newUserEntered()
-      .subscribe(data=> this.users = data;
-  );
+      .subscribe(data=> this.users = data);
     this._chatService.foundPerson()
       .subscribe(data=> {this.chatDetails = data;
       this.chatData = 1;
@@ -71,15 +70,11 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
 
   );
     this._chatService.foundPersonName()
-      .subscribe(data=> this.messageArray.push(data);
-
-  );
+      .subscribe(data=> this.messageArray.push(data));
 
     this._chatService.userLeftRoom()
-      .subscribe(data=>
-        this.messageArray.push(data);
-    this.chatDetails= {};
-    );
+      .subscribe(data=> {this.messageArray.push(data);
+      this.chatDetails= {}});
 
     this._chatService.newMessageReceived()
       .subscribe(data=>{this.messageArray.push(data);
