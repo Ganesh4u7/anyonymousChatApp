@@ -18,6 +18,9 @@ import {LoginService} from "./login.service";
 import {AuthGuard} from "./auth.guard";
 import {ChatService} from "./chat.service";
 import {ImageCropperComponent} from "ng2-img-cropper";
+import {enableProdMode} from "@angular/core";
+
+enableProdMode();
 
 
 // import 'hammerjs';
