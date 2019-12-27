@@ -198,4 +198,17 @@ export class ChatService{
 
     return observable;
   }
+
+
+  // this.socket.on('disconnect', function (error) {
+//     console.log('disconnected', this)
+//     //this sets whether the re connection is allowed or not
+//     this.io._reconnection = true;
+//   });
+//
+//   this.socket.on('reconnect', (error, callback) => {
+//   console.log('reconnect succesfully' ,this);
+//   //connect to the previously connected socket.
+//   this.io.socket.reconnect()
+// });
 }

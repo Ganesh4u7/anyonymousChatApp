@@ -94,6 +94,7 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
       );
     this._chatService.typingMessage()
       .subscribe(data=>{
+        if(this.chatData==1){
         this.typing = true;
           document.getElementById('typing').style.display="block";
         setTimeout(function () {
@@ -103,6 +104,7 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
           }
         ,2000);
       }
+  }
       );
     this._chatService.toImageUpdate()
       .subscribe(data=>{

@@ -43,6 +43,7 @@ db.once("open", function(callback) {
 var server = http.createServer(app);
 
 var io = require('socket.io').listen(server);
+var jwtAuth = require('socketio-jwt');
  var users=[];
  var userList=[];
 var  RPobj = {};
@@ -51,9 +52,25 @@ var Username = null;
 var FoundPersonID=null;
 
 
+// io.use(jwtAuth.authorize({
+//   secret: 'rogerFederer',
+//   handshake: true
+// }));
+
+// io.sockets.on('connection', socketioJwt.authorize({
+//     secret: 'rogerFederer',
+//     timeout: 15000 // 15 seconds to send the authentication message
+//   }))
+//   .on('authenticated', (socket) => {
+//     //this socket is authenticated, we are good to handle more events from it.
+//     console.log(`hello! ${socket.decoded_token.name}`);
+//   }
+
+   // socket.emit('connect',{your_jwt:socket.decoded_token.name});
 io.on('connection',(socket) => {
 
-    console.log('new connection made.');
+  console.log('new connection made.');
+
     socket.on('enter',function (data) {
 
 
