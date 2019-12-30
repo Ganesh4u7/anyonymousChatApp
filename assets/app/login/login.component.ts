@@ -71,10 +71,11 @@ export class LoginComponent implements OnInit {
     this.cropperSettings.croppedWidth =300;
     this.cropperSettings.croppedHeight = 300;
     this.cropperSettings.canvasWidth = 250;
-    this.cropperSettings.canvasHeight = 200;
+    this.cropperSettings.canvasHeight = 250;
     this.cropperSettings.noFileInput = true;
     this.cropperSettings.rounded = false;
-    this.cropperSettings.keepAspect = false;
+    // this.cropperSettings.keepAspect = false;
+    this.cropperSettings.preserveSize = true;
     this.cropperSettings.allowedFilesRegex =  /\.(jpe?g|png|gif|.JPG|.JPE?G)$/i;
 
     this.cropperSettings.cropperDrawSettings.strokeColor = 'rgba(255,255,255,1)';

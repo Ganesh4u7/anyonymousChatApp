@@ -130,3 +130,15 @@ input[type=radio] {
 .group {
   zoom: 1;
 }
+
+@media screen and (max-width: 420px) {
+  .crop-canvas{
+    margin-right: 10%;
+  }
+  .radio-inline{
+    padding-left: 0;
+  }
+  body{
+    padding: 20px;
+  }
+}

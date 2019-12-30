@@ -94,7 +94,7 @@
           <div class="file-upload">
                  <input id="custom-input" type="file" accept="image/*" style="margin-bottom: 10px;margin-left: 8px;margin-top: 5px;" (change)="fileChangeListener($event)">
           </div>
-                <div  *ngIf="data2" >
+                <div  *ngIf="data2" class="crop-canvas">
                   <img-cropper #cropper [image]="data1.image"  [settings]="cropperSettings" (onCrop)="cropped($event)"></img-cropper>
                 </div>
           <br>
