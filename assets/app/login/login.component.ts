@@ -137,7 +137,7 @@ export class LoginComponent implements OnInit {
     var that = this;
     myReader.onloadend = function (loadEvent:any) {
       image.src = loadEvent.target.result;
-      that.cropper.setImage(image);
+      image.onload=that.cropper.setImage(image);
 
     };
 
