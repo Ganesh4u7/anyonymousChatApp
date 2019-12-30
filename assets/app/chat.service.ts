@@ -26,7 +26,7 @@ export class ChatService{
 
     newUserJoined()
     {
-        let observable = new Observable<{user:String, message:String}>(observer=>{
+        let observable = new Observable<{user:string, message:string}>(observer=>{
             this.socket.on('new user joined', (data)=>{
                 observer.next(data);
             });
@@ -37,7 +37,7 @@ export class ChatService{
     }
     newUserEntered()
     {
-        let observable = new Observable<Array<{name:String,id:String}>>(observer=>{
+        let observable = new Observable<Array<{name:string,id:string}>>(observer=>{
             this.socket.on('new user entered', (data)=>{
                 observer.next(data);
             });
@@ -49,7 +49,7 @@ export class ChatService{
     }
     foundPerson()
     {
-        let observable = new Observable<{to:{name:String,id:String}, from:{name:String,id:String}}>(observer=>{
+        let observable = new Observable<any>(observer=>{
             this.socket.on('found person', (data)=>{
                 observer.next(data);
 
@@ -66,7 +66,7 @@ export class ChatService{
     }
     foundPersonName()
     {
-        let observable = new Observable<{message:String}>(observer=>{
+        let observable = new Observable<{user:string,message:string}>(observer=>{
             this.socket.on('found person name', (data)=>{
                 observer.next(data);
             });
@@ -78,7 +78,7 @@ export class ChatService{
 
   settingsSaveInfo()
   {
-    let observable = new Observable<{message:String,status:boolean}>(observer=>{
+    let observable = new Observable<{message:string,status:boolean}>(observer=>{
       this.socket.on('settings save info', (data)=>{
         observer.next(data);
       });
@@ -106,7 +106,7 @@ export class ChatService{
     this.socket.emit('signup',data);
   }
   signupStatus(){
-    let observable = new Observable<{success:boolean}>(observer=>{
+    let observable = new Observable<{username:string,url:string,success:boolean}>(observer=>{
       this.socket.on('signupStatus', (data)=>{
         observer.next(data);
       });
@@ -118,7 +118,7 @@ export class ChatService{
   }
 
   loginStatus(){
-    let observable = new Observable<{success:boolean}>(observer=>{
+    let observable = new Observable<{username:string,url:string,success:boolean}>(observer=>{
       this.socket.on('loginStatus', (data)=>{
         observer.next(data);
       });
@@ -128,7 +128,7 @@ export class ChatService{
   }
 
     userLeftRoom(){
-        let observable = new Observable<{user:String, message:String}>(observer=>{
+        let observable = new Observable<{user:string, message:string}>(observer=>{
             this.socket.on('left room', (data)=>{
                 observer.next(data);
             });
@@ -144,7 +144,7 @@ export class ChatService{
     }
 
     newMessageReceived(){
-        let observable = new Observable<{user:String, message:String}>(observer=>{
+        let observable = new Observable<{user:string, message:string}>(observer=>{
             this.socket.on('new message', (data)=>{
                 observer.next(data);
 
@@ -155,7 +155,7 @@ export class ChatService{
         return observable;
     }
     leftMessage(){
-        let observable = new Observable<{user:String, message:String}>(observer=>{
+        let observable = new Observable<{user:string, message:string}>(observer=>{
             this.socket.on('left message', (data)=>{
                 observer.next(data);
             });
@@ -189,7 +189,7 @@ export class ChatService{
       this.socket.emit('profilePicUpdate',data);
   }
   toImageUpdate(){
-    let observable = new Observable<{url:String}>(observer=>{
+    let observable = new Observable<{url:string}>(observer=>{
       this.socket.on('to image update', (data)=>{
         observer.next(data);
       });

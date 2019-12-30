@@ -3,9 +3,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {auth} from 'firebase';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LoginService {
   private isLoggedin =false;
   public username = '';

@@ -13,11 +13,12 @@ import { AppComponent } from "./app.component";
 import {LoginComponent} from "./login/login.component";
 import {ChatboxComponent} from "./chatbox/chatbox.component";
 import {SettingsComponent} from "./settings/settings.component";
+import {SignupComponent} from "./signup/signup.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {LoginService} from "./login.service";
 import {AuthGuard} from "./auth.guard";
 import {ChatService} from "./chat.service";
-import {ImageCropperComponent} from "ng2-img-cropper";
+import {ImageCropperModule} from "ng2-img-cropper";
 import {enableProdMode} from "@angular/core";
 
 enableProdMode();
@@ -49,11 +50,12 @@ export const firebaseConfig = {
 
 
 @NgModule({
-    declarations: [AppComponent,LoginComponent,ChatboxComponent,SettingsComponent, ImageCropperComponent],
+    declarations: [AppComponent,LoginComponent,ChatboxComponent,SettingsComponent,SignupComponent],
     imports: [BrowserModule,
       FormsModule,
       ReactiveFormsModule,
       HttpModule,
+      ImageCropperModule,
       AppRoutingModule,
       HttpClientModule,
       AngularFireModule.initializeApp(firebaseConfig),
