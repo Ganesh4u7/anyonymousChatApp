@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit {
   }
   loginGoogle(){
     console.log('Login..');
-    this.service.login();
+    // this.service.login();
 
 
   }

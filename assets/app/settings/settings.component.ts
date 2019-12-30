@@ -25,7 +25,7 @@ export class SettingsComponent  {
 
 
 
- settingsForm: FormGroup;
+ //settingsForm: FormGroup;
  selectedFile:File;
  settingsSaveMessage:String;
  settingsSaveBol:boolean;
@@ -97,7 +97,7 @@ imgUrl = this.chatComponent.imgUrl;
 
   }
 
-onSettings(form: FormGroup){
+onSettings(){
     var username = this.loginService.getUsername;
     var age = this.settingsForm.value.age;
     var gender = this.settingsForm.value.gender;
@@ -107,7 +107,7 @@ onSettings(form: FormGroup){
     this.chatService.matchSettings({username:username,gender:gender,age:age,language:language});
 
 }
-onUserSettings(form: FormGroup){
+onUserSettings(){
   var username = this.loginService.getUsername;
   var language = this.userSettingsForm.value.language;
  this.settingsBol = false;

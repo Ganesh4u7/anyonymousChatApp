@@ -6,14 +6,14 @@ import {ActivatedRoute} from '@angular/router';
 import {ChatService} from "../chat.service";
 import {FormControl, FormGroup, NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
-import {AngularFireDatabase} from "@angular/fire/database";
+import {AngularFireDatabase,AngularFireObject} from "@angular/fire/database";
 
 import {ImageCropperComponent, CropperSettings,Bounds} from 'ng2-img-cropper';
 
 import io from 'socket.io-client';
 
 import * as firebase from 'firebase';
-import {FirebaseObjectObservable} from "@angular/fire/database-deprecated";
+import {FirebaseListObservable,FirebaseObjectObservable} from "@angular/fire/database-deprecated";
 
 
 interface FeaturedPhotoUrls {
@@ -24,8 +24,7 @@ interface FeaturedPhotoUrls {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  declarations: [ImageCropperComponent]
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -36,7 +35,7 @@ export class LoginComponent implements OnInit {
   croppedWidth:number;
   croppedHeight:number;
 
-  FeaturedPhotoStream:FirebaseObjectObservable<FeaturedPhotoUrls>;
+  FeaturedPhotoStream:AngularFireObject<FeaturedPhotoUrls>;
 
   user:firebase.User;
   signupForm: FormGroup;
@@ -90,6 +89,7 @@ export class LoginComponent implements OnInit {
 
       // console.log(data);
       if(data.success == true){
+
 
         this.router.navigate(['/chat']);
         this.service.setLoggedin(true);
@@ -148,10 +148,10 @@ export class LoginComponent implements OnInit {
 
   }
 
-  const loginForm = new FormGroup({
-    username: new FormControl(),
-    pwd: new FormControl()
-  });
+  //  this.loginForm = new FormGroup({
+  //   username: new FormControl(),
+  //   pwd: new FormControl()
+  // });
 
 
   ngOnInit(){
@@ -169,29 +169,29 @@ export class LoginComponent implements OnInit {
       pwd: new FormControl(null)
     });
 
-    this.service.getLoggedInUser()
-      .subscribe(user => {
-        if (user) {
-
-          // console.log(user);
-          this.user = user;
-
-          if(user) {
-
-            this.chatService.login({name:user.displayName,email:user.email});
-            this.router.navigate(['/chat']);
-            this.service.setLoggedin(true);
-            this.service.setUsername(user.displayName);
-          }
-        }
-      })
+    // this.service.getLoggedInUser()
+    //   .subscribe(user => {
+    //     if (user) {
+    //
+    //       // console.log(user);
+    //       this.user = user;
+    //
+    //       if(user) {
+    //
+    //         this.chatService.login({name:user.displayName,email:user.email});
+    //         this.router.navigate(['/chat']);
+    //         this.service.setLoggedin(true);
+    //         this.service.setUsername(user.displayName);
+    //       }
+    //     }
+    //   })
   }
-  loginGoogle(){
-    console.log('Login..');
-    this.service.login();
-
-
-  }
+  // loginGoogle(){
+  //   console.log('Login..');
+  //   this.service.login();
+  //
+  //
+  // }
   loginFB(){
     console.log("Login..");
     this.service.loginFB();
@@ -200,14 +200,14 @@ export class LoginComponent implements OnInit {
     this.service.logout();
   }
 
-  onLogin(form: FormGroup){
+  onLogin(){
     var name = this.loginForm.value.username;
     var pwd = this.loginForm.value.pwd;
     this.chatService.login({username:name,password:pwd});
 
   }
 
-  onSignUp(form: FormGroup){
+  onSignUp(){
 
     if(this.signupForm.value.pwd == this.signupForm.value.cpwd){
 

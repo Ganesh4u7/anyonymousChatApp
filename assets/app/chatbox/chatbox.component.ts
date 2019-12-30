@@ -4,6 +4,7 @@ import {LoginService} from "../login.service";
 import {Router} from "@angular/router";
 import {AngularFireDatabase} from "@angular/fire/database";
 import {leave} from "@angular/core/src/profile/wtf_impl";
+import {s} from "@angular/core/src/render3";
 
 
 
@@ -24,21 +25,21 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
   room:String;
   users:Array<{name:String,id:String}> =[];
   messageText:String = '';
-  chatDetails:{};
+  chatDetails:any;
   FPname:string;FPgender:string;FPage:number;FPlanguage:string;FPimgUrl:string;FPid:string;
   chatData= 0;
   chatDataBol= false;
   msgData = 0;
   imgUrl: string ;
   FPurl: string;
-  leftMessage1:Array<{user:String,message:String}> = [];
+  leftMessage1:{user:string,message:string}= {user:'',message:''};
   leftMessage= 'Please Click on Find Person to start chatting';
   toggle :boolean = true;
   typing:boolean = false;
 
 
 
-  messageArray:Array<{user:String,message:String}> = [];
+  messageArray:Array<{user:string,message:string}> = [];
   constructor(private _chatService:ChatService,
               private router:Router,
               private  loginService:LoginService,
@@ -87,7 +88,7 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
         this.messageArray = [];
         this.msgData=0;
         this.messageArray.push(data);
-        this.leftMessage1= data ;
+        this.leftMessage1 = data;
         this.chatDetails= {};
         this.chatDataBol = false;
         this.chatData=0;}
@@ -145,20 +146,20 @@ ngAfterViewChecked() {
 toggleSidebar(){
 if(this.toggle == false){
   this.toggle = true;
-  document.getElementsByClassName('content')[0].style.width = 'calc(100% - 58px)';
+  document.getElementsByClassName('content')[0]['style'].width = 'calc(100% - 58px)';
   // document.getElementsByClassName('content')[0].style.position = 'relative';
   // document.getElementById('sidepanel').style.position = 'absolute';
 
   document.getElementById('sidepanel').style.width = '58px';
-   document.getElementsByClassName('profileDetails')[0].style.display = 'none';
+   document.getElementsByClassName('profileDetails')[0]['style'].display = 'none';
 
 }
 else if(this.toggle == true){
   this.toggle = false;
-  document.getElementsByClassName('content')[0].style.width = '50%';
+  document.getElementsByClassName('content')[0]['style'].width = '50%';
   document.getElementById('sidepanel').style.width = '50%';
   // document.getElementById('sidepanel').style.width = '53px';
-    document.getElementsByClassName('profileDetails')[0].style.display = 'block';
+    document.getElementsByClassName('profileDetails')[0]['style'].display = 'block';
 }
   // document.getElementsByClassName("sidebar")[0].classList.toggle('active');
   //
@@ -172,11 +173,11 @@ zoomImg(data:number){
     document.getElementById('myModal').style.display='block';
     if(data == 1)
     {
-      document.getElementById('img01').src = this.imgUrl;
+      (<HTMLImageElement> document.getElementById('img01')).src = this.imgUrl;
     }
     else if(data == 2)
     {
-      document.getElementById('img01').src = this.FPimgUrl;
+      (<HTMLImageElement> document.getElementById('img01')).src = this.FPimgUrl;
     }
 
 }
@@ -202,9 +203,9 @@ scrollToBottom(): void {
   leave(){
     if(this.toggle == false){
       this.toggle = true;
-      document.getElementsByClassName('content')[0].style.width = 'calc(100% - 58px)';
+      document.getElementsByClassName('content')[0]['style'].width = 'calc(100% - 58px)';
       document.getElementById('sidepanel').style.width = '58px';
-      document.getElementsByClassName('profileDetails')[0].style.display = 'none';
+      document.getElementsByClassName('profileDetails')[0]['style'].display = 'none';
     }
     const toName= this.chatDetails.to.name;
     const fromName= this.chatDetails.from.name;
@@ -265,19 +266,21 @@ scrollToBottom(): void {
 
   // Get the image and insert it inside the modal - use its "alt" text as a caption
   var img = document.getElementById("myImg");
-  var modalImg = document.getElementById("img01");
+  var modalImg = (<HTMLImageElement> document.getElementById("img01")).src;
   var captionText = document.getElementById("caption");
-  img.onClick = function(){
+    var url = this.FPurl;
+  img.onclick = function(){
     modal.style.display = "block";
-    modalImg.src = this.FPurl;
-    captionText.innerHTML = this.alt;
+
+    modalImg = url;
+
   }
-document.getElementsByClassName('modal')[0].style.display="block";
+document.getElementsByClassName('modal')[0]['style'].display="block";
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
 
   // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
+    document.getElementsByClassName("close")[0]['onclick'] = function() {
     modal.style.display = "none";
   }
 }
@@ -286,9 +289,9 @@ settings(){
     this.chatData = 2;
   if(this.toggle == false){
     this.toggle = true;
-    document.getElementsByClassName('content')[0].style.width = 'calc(100% - 58px)';
+    document.getElementsByClassName('content')[0]['style'].width = 'calc(100% - 58px)';
     document.getElementById('sidepanel').style.width = '58px';
-    document.getElementsByClassName('profileDetails')[0].style.display = 'none';
+    document.getElementsByClassName('profileDetails')[0]['style'].display = 'none';
   }
 }
 
