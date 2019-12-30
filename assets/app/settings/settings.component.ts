@@ -67,10 +67,14 @@ imgUrl = this.chatComponent.imgUrl;
     var myReader:FileReader = new FileReader();
     var that = this;
     myReader.onloadend = function (loadEvent:any) {
+      image.onload = () => {
+        that.cropper.setImage(image);
+      };
       image.src = loadEvent.target.result;
-      that.cropper.setImage(image);
+
 
     };
+
 
     myReader.readAsDataURL(file);
   }

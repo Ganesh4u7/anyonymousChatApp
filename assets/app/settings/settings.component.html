@@ -80,7 +80,7 @@
         <div class="form-group">
 
           <div class="file-upload">
-            <input id="custom-input" type="file"  (change)="fileChangeListener($event)">
+            <input id="custom-input" type="file"  accept="image/*" [multiple]="false" (change)="fileChangeListener($event)">
           </div>
           <div class="actualImg">
             <img-cropper style="width: 200px;height: 200px;" #cropper [image]="data1" [settings]="cropperSettings"></img-cropper>
