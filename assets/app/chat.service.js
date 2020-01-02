@@ -5,6 +5,19 @@ var ChatService = /** @class */ (function () {
     function ChatService() {
         this.socket = io().connect({ reconnection: true, reconnectionAttempts: Infinity });
     }
+    ChatService.prototype.ngOnInit = function () {
+        this.socket.on('reconnect', function (attemptNumber) {
+            console.log('Successfully Reconnected on Attempt:', attemptNumber);
+        });
+        this.socket.on('reconnect_error', function (error) {
+            console.log('error occured:', error);
+        });
+        this.socket.on('reconnecting', function (attemptNumber) {
+            console.log('Reconnection started Attempt :', attemptNumber);
+        });
+        this.socket.on('reconnect_failed', function () {
+        });
+    };
     ChatService.prototype.enterName = function (data) {
         this.socket.emit('enter', data);
     };

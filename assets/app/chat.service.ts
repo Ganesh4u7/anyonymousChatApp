@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import {Injectable, OnInit} from "@angular/core";
 import * as io from 'socket.io-client';
 import {Observable} from 'rxjs/Observable';
 
@@ -8,10 +8,28 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 
 
-export class ChatService{
+export class ChatService implements  OnInit{
     username:string;
     allowFind: boolean;
     private socket = io().connect({reconnection:true,reconnectionAttempts:Infinity});
+
+ngOnInit(){
+
+  this.socket.on('reconnect',(attemptNumber)=>{
+    console.log('Successfully Reconnected on Attempt:',attemptNumber)
+  });
+  this.socket.on('reconnect_error', (error) => {
+    console.log('error occured:',error);
+
+  });
+
+  this.socket.on('reconnecting', (attemptNumber) => {
+    console.log('Reconnection started Attempt :',attemptNumber)
+  });
+  this.socket.on('reconnect_failed', () => {
+
+  });
+}
 
 
 
