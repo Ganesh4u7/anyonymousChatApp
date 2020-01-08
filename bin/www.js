@@ -487,7 +487,7 @@ socket.on('reconnectError',function () {
 
 socket.on('disconnect', function () {
   var id = socket.id;
-io.on(RandomPobj.to.id).emit('connection lost message' ,{user:Username,message:'connection has lost or network is down , you can wait till he/she reconnects or you ' +
+io.in(RandomPobj.to.id).emit('connection lost message' ,{user:Username,message:'connection has lost or network is down , you can wait till he/she reconnects or you ' +
   'can click on Leave button to leave the chat'});
 
 
