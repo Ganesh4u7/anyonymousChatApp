@@ -3,20 +3,79 @@ import * as io from 'socket.io-client';
 import { Observable } from 'rxjs/Observable';
 var ChatService = /** @class */ (function () {
     function ChatService() {
-        this.socket = io().connect({ reconnection: true, reconnectionAttempts: Infinity });
-    }
-    ChatService.prototype.ngOnInit = function () {
+        var _this = this;
+        this.socket = io().connect({ reconnection: true, reconnectionAttempts: 10 });
         this.socket.on('reconnect', function (attemptNumber) {
             console.log('Successfully Reconnected on Attempt:', attemptNumber);
         });
         this.socket.on('reconnect_error', function (error) {
             console.log('error occured:', error);
+            _this.socket.emit('reconnectionError');
         });
         this.socket.on('reconnecting', function (attemptNumber) {
             console.log('Reconnection started Attempt :', attemptNumber);
         });
         this.socket.on('reconnect_failed', function () {
+            _this.socket.emit('reconnectionError');
         });
+    }
+    // reconnect(){
+    //   this.socket.on('reconnect',(attemptNumber)=>{
+    //     console.log('Successfully Reconnected on Attempt:',attemptNumber)
+    //   });
+    //   this.socket.on('reconnect_error', (error) => {
+    //     console.log('error occured:',error);
+    //     this.socket.emit('reconnectionError');
+    //
+    //   });
+    //
+    //   this.socket.on('reconnecting', (attemptNumber) => {
+    //     console.log('Reconnection started Attempt :',attemptNumber)
+    //   });
+    //   this.socket.on('reconnect_failed', () => {
+    //     this.socket.emit('reconnectionError');
+    //   });
+    //
+    // }
+    // reconnect(){
+    //   this.socket.on('reconnect',(attemptNumber)=>{
+    //     console.log('Successfully Reconnected on Attempt:',attemptNumber)
+    //   });
+    //   this.socket.on('reconnect_error', (error) => {
+    //     console.log('error occured:',error);
+    //     this.socket.emit('reconnectionError');
+    //
+    //   });
+    //
+    //   this.socket.on('reconnecting', (attemptNumber) => {
+    //     console.log('Reconnection started Attempt :',attemptNumber)
+    //   });
+    //   this.socket.on('reconnect_failed', () => {
+    //     this.socket.emit('reconnectionError');
+    //   });
+    //
+    // }
+    ChatService.prototype.connectionLost = 
+    // reconnect(){
+    //   this.socket.on('reconnect',(attemptNumber)=>{
+    //     console.log('Successfully Reconnected on Attempt:',attemptNumber)
+    //   });
+    //   this.socket.on('reconnect_error', (error) => {
+    //     console.log('error occured:',error);
+    //     this.socket.emit('reconnectionError');
+    //
+    //   });
+    //
+    //   this.socket.on('reconnecting', (attemptNumber) => {
+    //     console.log('Reconnection started Attempt :',attemptNumber)
+    //   });
+    //   this.socket.on('reconnect_failed', () => {
+    //     this.socket.emit('reconnectionError');
+    //   });
+    //
+    // }
+    function (data) {
+        this.socket.emit('connectionLost', data);
     };
     ChatService.prototype.enterName = function (data) {
         this.socket.emit('enter', data);
@@ -141,6 +200,16 @@ var ChatService = /** @class */ (function () {
         });
         return observable;
     };
+    ChatService.prototype.connectionLostMessage = function () {
+        var _this = this;
+        var observable = new Observable(function (observer) {
+            _this.socket.on('connection lost message', function (data) {
+                observer.next(data);
+            });
+            return function () { _this.socket.disconnect(); };
+        });
+        return observable;
+    };
     ChatService.prototype.userSettings = function (data) {
         this.socket.emit('userSettings', data);
     };
@@ -176,6 +245,8 @@ var ChatService = /** @class */ (function () {
     ChatService.decorators = [
         { type: Injectable },
     ];
+    /** @nocollapse */
+    ChatService.ctorParameters = function () { return []; };
     return ChatService;
 }());
 export { ChatService };

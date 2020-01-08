@@ -8,32 +8,53 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 
 
-export class ChatService implements  OnInit{
+export class ChatService{
     username:string;
     allowFind: boolean;
-    private socket = io().connect({reconnection:true,reconnectionAttempts:Infinity});
+    private socket ;
 
-ngOnInit(){
+ constructor(){
+   this.socket = io().connect({reconnection:true,reconnectionAttempts:10});
+   this.socket.on('reconnect',(attemptNumber)=>{
+     console.log('Successfully Reconnected on Attempt:',attemptNumber)
+   });
+   this.socket.on('reconnect_error', (error) => {
+     console.log('error occured:',error);
+     this.socket.emit('reconnectionError');
 
-  this.socket.on('reconnect',(attemptNumber)=>{
-    console.log('Successfully Reconnected on Attempt:',attemptNumber)
-  });
-  this.socket.on('reconnect_error', (error) => {
-    console.log('error occured:',error);
+   });
 
-  });
-
-  this.socket.on('reconnecting', (attemptNumber) => {
-    console.log('Reconnection started Attempt :',attemptNumber)
-  });
-  this.socket.on('reconnect_failed', () => {
-
-  });
-}
+   this.socket.on('reconnecting', (attemptNumber) => {
+     console.log('Reconnection started Attempt :',attemptNumber)
+   });
+   this.socket.on('reconnect_failed', () => {
+     this.socket.emit('reconnectionError');
+   });
+ }
 
 
 
-
+    // reconnect(){
+    //   this.socket.on('reconnect',(attemptNumber)=>{
+    //     console.log('Successfully Reconnected on Attempt:',attemptNumber)
+    //   });
+    //   this.socket.on('reconnect_error', (error) => {
+    //     console.log('error occured:',error);
+    //     this.socket.emit('reconnectionError');
+    //
+    //   });
+    //
+    //   this.socket.on('reconnecting', (attemptNumber) => {
+    //     console.log('Reconnection started Attempt :',attemptNumber)
+    //   });
+    //   this.socket.on('reconnect_failed', () => {
+    //     this.socket.emit('reconnectionError');
+    //   });
+    //
+    // }
+    connectionLost(data){
+      this.socket.emit('connectionLost',data);
+    }
     enterName(data){
         this.socket.emit('enter',data);
     }
@@ -181,6 +202,16 @@ ngOnInit(){
         });
 
         return observable;
+    }
+    connectionLostMessage(){
+      let observable = new Observable<{from:string, message:string}>(observer=>{
+        this.socket.on('connection lost message', (data)=>{
+          observer.next(data);
+        });
+        return () => {this.socket.disconnect();}
+      });
+
+      return observable;
     }
 
 
