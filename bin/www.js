@@ -46,8 +46,8 @@ var io = require('socket.io').listen(server);
 // var jwtAuth = require('socketio-jwt');
  var users=[];
  var userList=[];
-var  RPobj = {};
-var RandomPobj = {};
+var  RPobj = null;
+var RandomPobj = null ;
 var Username = null;
 var FoundPersonID=null;
 
@@ -295,6 +295,8 @@ io.on('connection',(socket) => {
       //socket.broadcast.to(data.room).emit('left room', {user:data.user, message:'has left the chat.',activity:false});
         io.in(To).emit('left message', {user: data.user, message: '- has left the chat.',activity:false});
         io.in(From).emit('left message', {user: data.user, message:'- You left the chat.',activity:false});
+        RPobj = null;
+        RandomPobj = null;
 
       socket.leave(data.room);
 
@@ -458,10 +460,15 @@ socket.on('signout', function(data){
       io.in(to).emit('typing message',{message:'typing...'});
     });
 socket.on('connectionLost',function (data) {
-  var  to =data.to;
-  var fromName = data.fromName;
-  io.in(to).emit('connection lost message',{from:fromName,message:'connection has lost or network is down , you can wait till he/she reconnects or you ' +
-    'can click on Leave button to leave the chat'});
+
+  if(RPobj != null) {
+    var to = RPobj.to.id;
+    var fromName = RPobj.from.name;
+    io.in(to).emit('connection lost message', {
+      from: fromName, message: 'connection has lost or network is down , you can wait till he/she reconnects or you ' +
+      'can click on Leave button to leave the chat'
+    });
+  }
 });
 
 socket.on('reconnectError',function () {
@@ -487,8 +494,8 @@ socket.on('reconnectError',function () {
 
 socket.on('disconnect', function () {
   var id = socket.id;
-io.in(RandomPobj.to.id).emit('connection lost message' ,{user:Username,message:'connection has lost or network is down , you can wait till he/she reconnects or you ' +
-  'can click on Leave button to leave the chat'});
+// io.in(RandomPobj.from.id).emit('connection lost message' ,{user:Username,message:'connection has lost or network is down , you can wait till he/she reconnects or you ' +
+//   'can click on Leave button to leave the chat'});
 
 
 });
