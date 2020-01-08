@@ -82,6 +82,10 @@ var ChatboxComponent = /** @class */ (function () {
             _this.FPimgUrl = data.url;
             _this.FPurl = data.url;
         });
+        this._chatService.connectionLostMessage()
+            .subscribe(function (data) {
+            alert(data.from + "'s " + data.message);
+        });
     }
     ChatboxComponent.prototype.ngOnInit = function () {
         this.user = this.loginService.username;
@@ -90,16 +94,27 @@ var ChatboxComponent = /** @class */ (function () {
         this.scrollToBottom();
     };
     ChatboxComponent.prototype.ngOnDestroy = function () {
+        // if(this.chatData == 1) {
+        //   const toName= this.chatDetails.to.name;
+        //   const fromName= this.chatDetails.from.name;
+        //   const to= this.chatDetails.to.id;
+        //   const from= this.chatDetails.from.id;
+        //   this.allowFind=false;
+        //
+        //
+        //   this._chatService.leaveRoom({user:this.user,chatData:1,to:to,from:from, toName:toName,fromName:fromName, room:this.room});
+        //
+        // }
+        // else if(this.chatData == 0){
+        //   this._chatService.signout({user:this.user,chatData:0})
+        // }
+        // this._chatService.reconnect();
         if (this.chatData == 1) {
             var toName = this.chatDetails.to.name;
             var fromName = this.chatDetails.from.name;
             var to = this.chatDetails.to.id;
             var from = this.chatDetails.from.id;
-            this.allowFind = false;
-            this._chatService.leaveRoom({ user: this.user, chataData: 1, to: to, from: from, toName: toName, fromName: fromName, room: this.room });
-        }
-        else if (this.chatData == 0) {
-            this._chatService.signout({ user: this.user, chatData: 0 });
+            this._chatService.connectionLost({ user: this.user, chatData: 1, to: to, from: from, toName: toName, fromName: fromName });
         }
     };
     ChatboxComponent.prototype.ngAfterViewChecked = function () {

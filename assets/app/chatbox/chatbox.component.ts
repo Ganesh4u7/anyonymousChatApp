@@ -3,6 +3,8 @@ import {ChatService} from "../chat.service";
 import {LoginService} from "../login.service";
 import {Router} from "@angular/router";
 import {AngularFireDatabase} from "@angular/fire/database";
+
+
 import {leave} from "@angular/core/src/profile/wtf_impl";
 import {s} from "@angular/core/src/render3";
 
@@ -114,6 +116,11 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
         this.FPurl = data.url;
       });
 
+    this._chatService.connectionLostMessage()
+      .subscribe(data=>{
+        alert(data.from+"'s " +data.message);
+      })
+
   }
 
 ngOnInit(){
@@ -125,19 +132,27 @@ ngOnInit(){
 }
 
 ngOnDestroy(): void{
-  if(this.chatData == 1) {
-    const toName= this.chatDetails.to.name;
-    const fromName= this.chatDetails.from.name;
-    const to= this.chatDetails.to.id;
-    const from= this.chatDetails.from.id;
-    this.allowFind=false;
-
-
-    this._chatService.leaveRoom({user:this.user,chataData:1,to:to,from:from, toName:toName,fromName:fromName, room:this.room});
-
-  }
-  else if(this.chatData == 0){
-    this._chatService.signout({user:this.user,chatData:0})
+  // if(this.chatData == 1) {
+  //   const toName= this.chatDetails.to.name;
+  //   const fromName= this.chatDetails.from.name;
+  //   const to= this.chatDetails.to.id;
+  //   const from= this.chatDetails.from.id;
+  //   this.allowFind=false;
+  //
+  //
+  //   this._chatService.leaveRoom({user:this.user,chatData:1,to:to,from:from, toName:toName,fromName:fromName, room:this.room});
+  //
+  // }
+  // else if(this.chatData == 0){
+  //   this._chatService.signout({user:this.user,chatData:0})
+  // }
+ // this._chatService.reconnect();
+  if(this.chatData ==1){
+      let toName= this.chatDetails.to.name;
+      let fromName= this.chatDetails.from.name;
+      let to= this.chatDetails.to.id;
+      let from= this.chatDetails.from.id;
+    this._chatService.connectionLost({user:this.user,chatData:1,to:to,from:from, toName:toName,fromName:fromName});
   }
 }
 ngAfterViewChecked() {
