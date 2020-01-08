@@ -14,67 +14,13 @@ var ChatService = /** @class */ (function () {
         });
         this.socket.on('reconnecting', function (attemptNumber) {
             console.log('Reconnection started Attempt :', attemptNumber);
+            _this.socket.emit('connectionLost');
         });
         this.socket.on('reconnect_failed', function () {
             _this.socket.emit('reconnectionError');
         });
     }
-    // reconnect(){
-    //   this.socket.on('reconnect',(attemptNumber)=>{
-    //     console.log('Successfully Reconnected on Attempt:',attemptNumber)
-    //   });
-    //   this.socket.on('reconnect_error', (error) => {
-    //     console.log('error occured:',error);
-    //     this.socket.emit('reconnectionError');
-    //
-    //   });
-    //
-    //   this.socket.on('reconnecting', (attemptNumber) => {
-    //     console.log('Reconnection started Attempt :',attemptNumber)
-    //   });
-    //   this.socket.on('reconnect_failed', () => {
-    //     this.socket.emit('reconnectionError');
-    //   });
-    //
-    // }
-    // reconnect(){
-    //   this.socket.on('reconnect',(attemptNumber)=>{
-    //     console.log('Successfully Reconnected on Attempt:',attemptNumber)
-    //   });
-    //   this.socket.on('reconnect_error', (error) => {
-    //     console.log('error occured:',error);
-    //     this.socket.emit('reconnectionError');
-    //
-    //   });
-    //
-    //   this.socket.on('reconnecting', (attemptNumber) => {
-    //     console.log('Reconnection started Attempt :',attemptNumber)
-    //   });
-    //   this.socket.on('reconnect_failed', () => {
-    //     this.socket.emit('reconnectionError');
-    //   });
-    //
-    // }
-    ChatService.prototype.connectionLost = 
-    // reconnect(){
-    //   this.socket.on('reconnect',(attemptNumber)=>{
-    //     console.log('Successfully Reconnected on Attempt:',attemptNumber)
-    //   });
-    //   this.socket.on('reconnect_error', (error) => {
-    //     console.log('error occured:',error);
-    //     this.socket.emit('reconnectionError');
-    //
-    //   });
-    //
-    //   this.socket.on('reconnecting', (attemptNumber) => {
-    //     console.log('Reconnection started Attempt :',attemptNumber)
-    //   });
-    //   this.socket.on('reconnect_failed', () => {
-    //     this.socket.emit('reconnectionError');
-    //   });
-    //
-    // }
-    function (data) {
+    ChatService.prototype.connectionLost = function (data) {
         this.socket.emit('connectionLost', data);
     };
     ChatService.prototype.enterName = function (data) {

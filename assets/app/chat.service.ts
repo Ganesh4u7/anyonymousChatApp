@@ -25,7 +25,8 @@ export class ChatService{
    });
 
    this.socket.on('reconnecting', (attemptNumber) => {
-     console.log('Reconnection started Attempt :',attemptNumber)
+     console.log('Reconnection started Attempt :',attemptNumber);
+     this.socket.emit('connectionLost');
    });
    this.socket.on('reconnect_failed', () => {
      this.socket.emit('reconnectionError');
@@ -33,25 +34,6 @@ export class ChatService{
  }
 
 
-
-    // reconnect(){
-    //   this.socket.on('reconnect',(attemptNumber)=>{
-    //     console.log('Successfully Reconnected on Attempt:',attemptNumber)
-    //   });
-    //   this.socket.on('reconnect_error', (error) => {
-    //     console.log('error occured:',error);
-    //     this.socket.emit('reconnectionError');
-    //
-    //   });
-    //
-    //   this.socket.on('reconnecting', (attemptNumber) => {
-    //     console.log('Reconnection started Attempt :',attemptNumber)
-    //   });
-    //   this.socket.on('reconnect_failed', () => {
-    //     this.socket.emit('reconnectionError');
-    //   });
-    //
-    // }
     connectionLost(data){
       this.socket.emit('connectionLost',data);
     }
