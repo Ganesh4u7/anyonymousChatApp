@@ -457,25 +457,39 @@ socket.on('signout', function(data){
 
       io.in(to).emit('typing message',{message:'typing...'});
     });
+socket.on('connectionLost',function (data) {
+  var  to =data.to;
+  var fromName = data.fromName;
+  io.in(to).emit('connection lost message',{from:fromName,message:'connection has lost or network is down , you can wait till he/she reconnects or you ' +
+    'can click on Leave button to leave the chat'});
+});
 
+socket.on('reconnectError',function () {
+  var id = socket.id;
+  usersData.update({socketId:id},{socketId:'',activity:false},function (err1,data1) {
+    if(err1){console.log(err1);}
+    else{console.log(data1)}
+  });
+  if(FoundPersonID!= null){
+    usersData.update({socketId:FoundPersonID},{activity:true},function (err1,data1) {
+      if(err1){console.log(err1);}
+      else{console.log(data1);
+        io.in(FoundPersonID).emit('left message', {user: Username, message: 'has left the chat.',activity:false});}
+    });
+  }
 
+  });
 
+// socket.on('reconnect',function () {
+//
+//
+// });
 
 socket.on('disconnect', function () {
-    var id = socket.id;
+  var id = socket.id;
+io.on(RandomPobj.to.id).emit('connection lost message' ,{user:Username,message:'connection has lost or network is down , you can wait till he/she reconnects or you ' +
+  'can click on Leave button to leave the chat'});
 
-
-    usersData.update({socketId:id},{socketId:'',activity:false},function (err1,data1) {
-        if(err1){console.log(err1);}
-        else{console.log(data1)}
-    });
-    if(FoundPersonID!= null){
-      usersData.update({socketId:FoundPersonID},{activity:true},function (err1,data1) {
-        if(err1){console.log(err1);}
-        else{console.log(data1);
-          io.in(FoundPersonID).emit('left message', {user: Username, message: 'has left the chat.',activity:false});}
-      });
-    }
 
 });
 
