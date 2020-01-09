@@ -514,7 +514,10 @@ socket.on('reconnectError',function () {
 socket.on('disconnect', function () {
   var id = socket.id;
   console.log(id+': Disconnected.');
- io.in(to).emit('connection lost message', {
+  if(RPobj != null) {
+    var to = RPobj.to.id;
+    var fromName = RPobj.from.name;
+    io.in(to).emit('connection lost message', {
       from: fromName, message: 'connection has lost or network is down , you can wait till he/she reconnects or you ' +
       'can click on Leave button to leave the chat'
     });
