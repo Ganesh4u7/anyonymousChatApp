@@ -60,7 +60,8 @@ io.on('connection',(socket) => {
   if(RPobj != null ){
     RPobj.from.id = socket.id;
     RandomPobj.to.id = socket.id;
-
+    console.log(RPobj);
+    console.log(RandomPobj);
 
     io.in(RPobj.to.id).emit('found person', RandomPobj);
     io.in(RPobj.from.id).emit('found person', RPobj);
