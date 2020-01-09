@@ -57,7 +57,7 @@ var FoundPersonID=null;
 io.on('connection',(socket) => {
 
   console.log('new connection made. '+socket.id);
-  if(ID != null && ID != socket.id ){
+  if(RPobj != null ){
     RPobj.from.id = socket.id;
     RandomPobj.to.id = socket.id;
 
