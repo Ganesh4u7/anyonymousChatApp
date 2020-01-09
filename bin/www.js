@@ -57,12 +57,13 @@ var FoundPersonID=null;
 io.on('connection',(socket) => {
 
   console.log('new connection made. '+socket.id);
-  if(ID != socket.id){
+  if(ID != null && ID != socket.id ){
     RPobj.from.id = socket.id;
     RandomPobj.to.id = socket.id;
 
-    io.in(RPobj.from.id).emit('found person', RandomPobj);
-    io.in(RPobj.to.id).emit('found person', RPobj);
+
+    io.in(RPobj.to.id).emit('found person', RandomPobj);
+    io.in(RPobj.from.id).emit('found person', RPobj);
     usersData.update({username: Username}, {socketId: socket.id}, function (err2, data2) {
       if (err2) {
         console.log(err2);
