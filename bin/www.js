@@ -62,7 +62,7 @@ io.on('connection',(socket) => {
 
     io.in(RPobj.from.id).emit('found person', RandomPobj);
     io.in(RPobj.to.id).emit('found person', RPobj);
-    usersData.update({username: Username}, {socketId: id,activity:true}, function (err2, data2) {
+    usersData.update({username: Username}, {socketId: socket.id}, function (err2, data2) {
       if (err2) {
         console.log(err2);
       }
