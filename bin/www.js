@@ -443,7 +443,7 @@ socket.on('signout', function(data){
 
                 console.log(To);
                 io.in(To).emit('new message', {user: data.user, message: data.message});
-              io.in(From).emit('new message', {user: data.user, message: data.message});
+              // io.in(From).emit('new message', {user: data.user, message: data.message});
 
 
     });
@@ -494,6 +494,7 @@ socket.on('reconnectError',function () {
 
 socket.on('disconnect', function () {
   var id = socket.id;
+  console.log(id+': Disconnected.');
 // io.in(RandomPobj.from.id).emit('connection lost message' ,{user:Username,message:'connection has lost or network is down , you can wait till he/she reconnects or you ' +
 //   'can click on Leave button to leave the chat'});
 
