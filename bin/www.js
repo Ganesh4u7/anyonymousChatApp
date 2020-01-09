@@ -56,6 +56,22 @@ var FoundPersonID=null;
 io.on('connection',(socket) => {
 
   console.log('new connection made.');
+  if(RandomPobj != null){
+    RPobj.from.id = socket.id;
+    RandomPobj.to.id = socket.id;
+
+    io.in(RPobj.from.id).emit('found person', RandomPobj);
+    io.in(RPobj.to.id).emit('found person', RPobj);
+    usersData.update({username: Username}, {socketId: id,activity:true}, function (err2, data2) {
+      if (err2) {
+        console.log(err2);
+      }
+      else {
+        console.log(data2);
+      }
+    });
+
+  }
 
     socket.on('enter',function (data) {
 
