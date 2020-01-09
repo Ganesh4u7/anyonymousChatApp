@@ -49,14 +49,15 @@ var io = require('socket.io').listen(server);
 var  RPobj = null;
 var RandomPobj = null ;
 var Username = null;
+var ID = null;
 var FoundPersonID=null;
 
 
 
 io.on('connection',(socket) => {
 
-  console.log('new connection made.');
-  if(RandomPobj != null){
+  console.log('new connection made. '+socket.id);
+  if(ID != socket.id){
     RPobj.from.id = socket.id;
     RandomPobj.to.id = socket.id;
 
@@ -78,6 +79,7 @@ io.on('connection',(socket) => {
 
       var username = data.user;
       Username = username;
+      ID = socket.id;
       var id = socket.id;
 
       usersData.update({username: username}, {socketId: id,activity:true}, function (err2, data2) {
