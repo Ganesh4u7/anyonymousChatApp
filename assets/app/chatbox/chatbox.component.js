@@ -41,6 +41,20 @@ var ChatboxComponent = /** @class */ (function () {
             _this.FPurl = data.to.url;
             // console.log(data.to);
         });
+        this._chatService.afterReconnect()
+            .subscribe(function (data) {
+            _this.chatDetails = data;
+            _this.chatData = 1;
+            _this.chatDataBol = true;
+            _this.FPname = data.to.name;
+            _this.FPgender = data.to.gender;
+            _this.FPage = data.to.age;
+            _this.FPid = data.to.id;
+            _this.FPlanguage = data.to.language;
+            _this.FPimgUrl = data.to.url;
+            _this.FPurl = data.to.url;
+            // console.log(data.to);
+        });
         this._chatService.foundPersonName()
             .subscribe(function (data) { return _this.messageArray.push(data); });
         this._chatService.userLeftRoom()
@@ -186,6 +200,7 @@ var ChatboxComponent = /** @class */ (function () {
         var from = this.chatDetails.from.id;
         var toName = this.chatDetails.to.name;
         console.log(toName);
+        this.messageArray.push({ user: this.user, message: this.messageText });
         this._chatService.sendMessage({ user: this.user, to: to, from: from, toName: toName, message: this.messageText });
         this.messageText = '';
     };

@@ -21,12 +21,12 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
 
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
-  user:String;
+  user:string;
   allow=false;
   allowFind: boolean;
   room:String;
   users:Array<{name:String,id:String}> =[];
-  messageText:String = '';
+  messageText:string = '';
   chatDetails:any;
   FPname:string;FPgender:string;FPage:number;FPlanguage:string;FPimgUrl:string;FPid:string;
   chatData= 0;
@@ -72,6 +72,21 @@ export class ChatboxComponent implements OnInit,OnDestroy,AfterViewChecked{
       }
 
   );
+    this._chatService.afterReconnect()
+      .subscribe(data=> {this.chatDetails = data;
+          this.chatData = 1;
+          this.chatDataBol = true;
+          this.FPname = data.to.name;
+          this.FPgender = data.to.gender;
+          this.FPage = data.to.age;
+          this.FPid = data.to.id;
+          this.FPlanguage = data.to.language;
+          this.FPimgUrl = data.to.url;
+          this.FPurl = data.to.url;
+          // console.log(data.to);
+        }
+
+      );
     this._chatService.foundPersonName()
       .subscribe(data=> this.messageArray.push(data));
 
@@ -242,6 +257,7 @@ scrollToBottom(): void {
     var from= this.chatDetails.from.id;
     var toName = this.chatDetails.to.name;
     console.log(toName);
+    this.messageArray.push({user:this.user,message:this.messageText});
     this._chatService.sendMessage({user:this.user, to:to, from:from, toName: toName,message:this.messageText});
     this.messageText = '';
   }

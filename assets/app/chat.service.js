@@ -61,6 +61,17 @@ var ChatService = /** @class */ (function () {
         });
         return observable;
     };
+    ChatService.prototype.afterReconnect = function () {
+        var _this = this;
+        var observable = new Observable(function (observer) {
+            _this.socket.on('after reconnect', function (data) {
+                observer.next(data);
+                _this.allowFind = true;
+            });
+            return function () { _this.socket.disconnect(); };
+        });
+        return observable;
+    };
     ChatService.prototype.foundPersonName = function () {
         var _this = this;
         var observable = new Observable(function (observer) {

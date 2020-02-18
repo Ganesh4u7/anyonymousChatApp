@@ -85,6 +85,23 @@ export class ChatService{
         return observable;
 
     }
+  afterReconnect()
+  {
+    let observable = new Observable<any>(observer=>{
+      this.socket.on('after reconnect', (data)=>{
+        observer.next(data);
+
+
+        this.allowFind=true;
+
+      });
+      return () => {this.socket.disconnect();}
+    });
+
+
+    return observable;
+
+  }
     foundPersonName()
     {
         let observable = new Observable<{user:string,message:string}>(observer=>{
