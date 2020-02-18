@@ -57,14 +57,17 @@ var FoundPersonID=null;
 io.on('connection',(socket) => {
 
   console.log('new connection made. '+socket.id);
-  if(RPobj != null ){
+  if(RPobj != null){
     RPobj.from.id = socket.id;
     RandomPobj.to.id = socket.id;
+
     console.log(RPobj);
     console.log(RandomPobj);
 
-    io.in(RPobj.to.id).emit('found person', RandomPobj);
-    io.in(RPobj.from.id).emit('found person', RPobj);
+
+
+    io.in(RPobj.to.id).emit('after reconnect', RandomPobj);
+    io.in(RPobj.from.id).emit('after reconnect', RPobj);
     usersData.update({username: Username}, {socketId: socket.id}, function (err2, data2) {
       if (err2) {
         console.log(err2);
@@ -278,14 +281,16 @@ io.on('connection',(socket) => {
               }
 
             });
-            console.log(socket.id,FSI);
+
 
 
             io.in(FSI).emit('found person', RandomPobj);
             io.in(data2[0].socketId).emit('found person', RPobj);
             io.in(FSI).emit('new message',{user: RandomPobj.from.name, message: RandomPobj.to.name+ ' connected'});
             io.in(data2[0].socketId).emit('new message',{user:RandomPobj.to.name, message: RPobj.to.name+ ' connected'});
-            console.log(RPobj.to);
+          //  console.log(RPobj.to);
+            let sid = socket.id
+            console.log("Sender ID:"+sid +"+ Receiver ID:"+FSI);
 
           }
         })
@@ -484,10 +489,10 @@ socket.on('connectionLost',function (data) {
   if(RPobj != null) {
     var to = RPobj.to.id;
     var fromName = RPobj.from.name;
-//     io.in(to).emit('connection lost message', {
-//       from: fromName, message: 'connection has lost or network is down , you can wait till he/she reconnects or you ' +
-//       'can click on Leave button to leave the chat'
-//     });
+    // io.in(to).emit('connection lost message', {
+    //   from: fromName, message: 'connection has lost or network is down , you can wait till he/she reconnects or you ' +
+    //   'can click on Leave button to leave the chat'
+    // });
   }
 });
 
